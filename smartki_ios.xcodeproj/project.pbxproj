@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A12FC52D1BA7EEB800C833AC /* myfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC52C1BA7EEB800C833AC /* myfileController.m */; };
 		A12FC5301BA7EED000C833AC /* userinfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC52F1BA7EED000C833AC /* userinfoController.m */; };
+		A12FC5331BA7F81200C833AC /* newsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC5321BA7F81200C833AC /* newsModel.m */; };
 		A1FDD5611BA6BDA600A1F22F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FDD5601BA6BDA600A1F22F /* main.m */; };
 		A1FDD5641BA6BDA600A1F22F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FDD5631BA6BDA600A1F22F /* AppDelegate.m */; };
 		A1FDD56A1BA6BDA600A1F22F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1FDD5681BA6BDA600A1F22F /* Main.storyboard */; };
@@ -106,6 +107,8 @@
 		A12FC52C1BA7EEB800C833AC /* myfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myfileController.m; sourceTree = "<group>"; };
 		A12FC52E1BA7EED000C833AC /* userinfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userinfoController.h; sourceTree = "<group>"; };
 		A12FC52F1BA7EED000C833AC /* userinfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = userinfoController.m; sourceTree = "<group>"; };
+		A12FC5311BA7F81200C833AC /* newsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newsModel.h; sourceTree = "<group>"; };
+		A12FC5321BA7F81200C833AC /* newsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newsModel.m; sourceTree = "<group>"; };
 		A1FDD55C1BA6BDA600A1F22F /* smartki_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = smartki_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FDD5601BA6BDA600A1F22F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A1FDD5621BA6BDA600A1F22F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -272,6 +275,8 @@
 			children = (
 				A1FDD5F51BA6F32100A1F22F /* loginModel.h */,
 				A1FDD5F61BA6F32100A1F22F /* loginModel.m */,
+				A12FC5311BA7F81200C833AC /* newsModel.h */,
+				A12FC5321BA7F81200C833AC /* newsModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -534,6 +539,7 @@
 				A12FC5301BA7EED000C833AC /* userinfoController.m in Sources */,
 				A1FDD5B51BA6BFEF00A1F22F /* AFURLResponseSerialization.m in Sources */,
 				A1FDD5BE1BA6BFEF00A1F22F /* AFHTTPSessionManager.m in Sources */,
+				A12FC5331BA7F81200C833AC /* newsModel.m in Sources */,
 				A1FDD5AF1BA6BFEF00A1F22F /* AFURLConnectionOperation.m in Sources */,
 				A1FDD5ED1BA6C3F200A1F22F /* loginController.m in Sources */,
 				A1FDD5D21BA6C02600A1F22F /* GCDQueue.m in Sources */,
