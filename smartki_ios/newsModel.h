@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+@protocol newsModelProtocol
+- (void)requestNewsResult:(NSDictionary *)result;
+@end
 
 @interface newsModel : NSObject
+@property(strong,nonatomic)id<newsModelProtocol>newsDelegate;
+
+@property(nonatomic,retain) NSDictionary *newsData;
+-(void)AFGetNewsJsonWithURL:(NSString *)url andRequestData:(NSDictionary *)data;
 
 @end

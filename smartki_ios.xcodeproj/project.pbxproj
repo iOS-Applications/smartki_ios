@@ -10,6 +10,8 @@
 		A12FC52D1BA7EEB800C833AC /* myfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC52C1BA7EEB800C833AC /* myfileController.m */; };
 		A12FC5301BA7EED000C833AC /* userinfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC52F1BA7EED000C833AC /* userinfoController.m */; };
 		A12FC5331BA7F81200C833AC /* newsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC5321BA7F81200C833AC /* newsModel.m */; };
+		A12FC5361BA7FF3000C833AC /* HTTP_METHOD.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC5351BA7FF3000C833AC /* HTTP_METHOD.m */; };
+		A12FC53C1BA8598800C833AC /* myfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC53B1BA8598800C833AC /* myfileModel.m */; };
 		A1FDD5611BA6BDA600A1F22F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FDD5601BA6BDA600A1F22F /* main.m */; };
 		A1FDD5641BA6BDA600A1F22F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FDD5631BA6BDA600A1F22F /* AppDelegate.m */; };
 		A1FDD56A1BA6BDA600A1F22F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1FDD5681BA6BDA600A1F22F /* Main.storyboard */; };
@@ -109,6 +111,10 @@
 		A12FC52F1BA7EED000C833AC /* userinfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = userinfoController.m; sourceTree = "<group>"; };
 		A12FC5311BA7F81200C833AC /* newsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newsModel.h; sourceTree = "<group>"; };
 		A12FC5321BA7F81200C833AC /* newsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newsModel.m; sourceTree = "<group>"; };
+		A12FC5341BA7FF3000C833AC /* HTTP_METHOD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTP_METHOD.h; sourceTree = "<group>"; };
+		A12FC5351BA7FF3000C833AC /* HTTP_METHOD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTP_METHOD.m; sourceTree = "<group>"; };
+		A12FC53A1BA8598800C833AC /* myfileModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myfileModel.h; sourceTree = "<group>"; };
+		A12FC53B1BA8598800C833AC /* myfileModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myfileModel.m; sourceTree = "<group>"; };
 		A1FDD55C1BA6BDA600A1F22F /* smartki_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = smartki_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FDD5601BA6BDA600A1F22F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A1FDD5621BA6BDA600A1F22F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -277,6 +283,8 @@
 				A1FDD5F61BA6F32100A1F22F /* loginModel.m */,
 				A12FC5311BA7F81200C833AC /* newsModel.h */,
 				A12FC5321BA7F81200C833AC /* newsModel.m */,
+				A12FC53A1BA8598800C833AC /* myfileModel.h */,
+				A12FC53B1BA8598800C833AC /* myfileModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -310,6 +318,8 @@
 		A1FDD5951BA6BEF600A1F22F /* Utiles */ = {
 			isa = PBXGroup;
 			children = (
+				A12FC5341BA7FF3000C833AC /* HTTP_METHOD.h */,
+				A12FC5351BA7FF3000C833AC /* HTTP_METHOD.m */,
 			);
 			name = Utiles;
 			sourceTree = "<group>";
@@ -530,6 +540,7 @@
 				A1FDD5CF1BA6C02600A1F22F /* GCDGroup.m in Sources */,
 				A1FDD6021BA7B22300A1F22F /* Base64.m in Sources */,
 				A1FDD5C11BA6BFEF00A1F22F /* AFURLSessionManager.m in Sources */,
+				A12FC5361BA7FF3000C833AC /* HTTP_METHOD.m in Sources */,
 				A1FDD5E71BA6C06E00A1F22F /* MBProgressHUD.m in Sources */,
 				A1FDD5B81BA6BFEF00A1F22F /* AFHTTPRequestOperation.m in Sources */,
 				A1FDD5D51BA6C02600A1F22F /* GCDSemaphore.m in Sources */,
@@ -541,6 +552,7 @@
 				A1FDD5BE1BA6BFEF00A1F22F /* AFHTTPSessionManager.m in Sources */,
 				A12FC5331BA7F81200C833AC /* newsModel.m in Sources */,
 				A1FDD5AF1BA6BFEF00A1F22F /* AFURLConnectionOperation.m in Sources */,
+				A12FC53C1BA8598800C833AC /* myfileModel.m in Sources */,
 				A1FDD5ED1BA6C3F200A1F22F /* loginController.m in Sources */,
 				A1FDD5D21BA6C02600A1F22F /* GCDQueue.m in Sources */,
 				A1FDD5BB1BA6BFEF00A1F22F /* AFHTTPRequestOperationManager.m in Sources */,

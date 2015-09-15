@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "loginModel.h"
 
+
 @interface mainTabController : UITabBarController
-@property (retain,nonatomic) loginModel *getloginCon_Data;
+@property(retain,nonatomic)loginModel *getloginCon_Data;
+
+-(void)AFGetVarify;
+
 @end

@@ -8,16 +8,21 @@
 
 #import "newsController.h"
 #import "newsModel.h"
+#import "GCD.h"
+#import "MBProgressHUD+MJ.h"
 
-#define user        @"user"
-#define password    @"password"
-#define token       @"token"
-#define isLogin     @"isLogin"
+#define user            @"user"
+#define password        @"password"
+#define token           @"token"
+#define isLogin         @"isLogin"
+#define request_url     @"https://233.smartki.sinaapp.com/smartki_api_view.php"
 
-@interface newsController ()<UITableViewDataSource,UITableViewDelegate>{
+@interface newsController ()<UITableViewDataSource,UITableViewDelegate,newsModelProtocol>{
     
 }
 @property (weak, nonatomic) IBOutlet UITableView *newsTableView;
+@property newsModel     *newsmode;
+@property NSArray       *newsDataArr; // 网络请求回来的最新网盘记录数据存入这里，之后赋值tableview
 
 @end
 
@@ -33,24 +38,59 @@
     NSString        *my_user        = [defaults valueForKey:user];
     NSString        *my_token       = [defaults valueForKey:token];
     NSString        *my_password    = [defaults valueForKey:password];
-    BOOL            my_isLogin      = [defaults boolForKey:isLogin];
+    BOOL             my_isLogin     = [defaults boolForKey:isLogin];
     
-    self.newsTableView.dataSource = weakSelf;
+    self.newsmode = [[newsModel alloc]init];
+    self.newsDataArr = [NSArray new];
+    
     self.newsTableView.delegate = weakSelf;
+    self.newsmode.newsDelegate = weakSelf;
     
+    [self getNewsDataRequestWithUser:my_user andToken:my_token];
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    NSLog(@"newsController appear测试");
+// 网络请求
+-(void)getNewsDataRequestWithUser:(NSString *)userText andToken:(NSString *)tokenText{
+    [MBProgressHUD showMessage:@"数据加载中"];
+    [GCDQueue executeInGlobalQueue:^{
+        [self.newsmode AFGetNewsJsonWithURL:request_url andRequestData:@{
+                                                                         @"action":@"newsData",
+                                                                         @"user":userText,
+                                                                         @"token":tokenText
+                                                                         }
+         ];
+    }];
+}
+
+#pragma mark newsModelProtocol回调函数
+-(void)requestNewsResult:(NSDictionary *)result{
+    NSArray *result_Arr = [result objectForKey:@"resp"];
+    NSLog(@"newsData result:%@",result_Arr);
     
     __weak typeof(self) weakSelf = self;
-    self.newsTableView.dataSource = weakSelf;
-    self.newsTableView.delegate = weakSelf;
-}
-
--(void)viewDidDisappear:(BOOL)animated{
-    self.newsTableView.dataSource = nil;
-    self.newsTableView.delegate = nil;
+    // 处理UI主线程
+    [GCDQueue executeInMainQueue:^{
+        [MBProgressHUD hideHUD];
+        
+        // 如果token不对或者网络失败
+        if ([[result objectForKey:@"NETBREAK"] isEqualToString:@"NETBREAK"]) {
+            [MBProgressHUD showError:@"网络故障"];
+            return;
+        }
+        
+        if ([[result objectForKey:@"pass"] isEqualToString:@"false"]) {
+            [MBProgressHUD showError:@"加载失败"];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+            return;
+        }
+        
+        self.newsDataArr = [[NSArray alloc]initWithArray:result_Arr copyItems:YES];
+        self.newsTableView.dataSource = weakSelf;
+        
+        [MBProgressHUD showSuccess:@"数据加载完毕"];
+        [self.newsTableView reloadData]; // 刷新表格
+        NSLog(@"self.news :%@,count:%lu",[self.newsDataArr[0] objectForKey:@"pan_name"],(unsigned long)self.newsDataArr.count);
+    }];
 }
 
 #pragma mark 上拉和下拉刷新
@@ -63,14 +103,10 @@
     
     float height = scrollView.contentSize.height > self.newsTableView.frame.size.height ?self.newsTableView.frame.size.height : scrollView.contentSize.height;
     
-    
-    
     if ((height - scrollView.contentSize.height + scrollView.contentOffset.y) / height > 0.2) {
         // 调用上拉刷新方法
         NSLog(@"refresh");
     }
-    
-    
     
     if (- scrollView.contentOffset.y / self.newsTableView.frame.size.height > 0.2) {
         // 调用下拉刷新方法
@@ -83,15 +119,49 @@
 }
 
 -(NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return nil;
+    return self.newsDataArr.count;
 }
 
 -(nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    return nil;
+    static NSString *ID = @"C1"; // 创建静态缓存池
+    
+    // 1.从缓存池中取出可循环利用的cell
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+
+    // 2.如果缓存池中没有可循环利用的cell
+    if (cell == nil)
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
+    
+    // 设置cell的行数 字体等等
+    cell.textLabel.numberOfLines = 4;
+    [cell.textLabel setFont:[UIFont boldSystemFontOfSize:18]];
+    
+    cell.backgroundColor = [UIColor clearColor];
+    cell.textLabel.textColor = [UIColor blackColor];
+    cell.textLabel.textAlignment = 1;
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%@.%@",[self.newsDataArr[indexPath.row] objectForKey:@"pan_name"],[self.newsDataArr[indexPath.row] objectForKey:@"pan_type"]];
+    
+    return cell;// web/dodelete.jsp?goodsId=*
 }
 
 -(void)tableView:(nonnull UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    
+}
 
+-(void)viewDidAppear:(BOOL)animated{
+    NSLog(@"newsController appear测试");
+    
+    //    __weak typeof(self) weakSelf = self;
+    //    self.newsTableView.dataSource = weakSelf;
+    //    self.newsTableView.delegate = weakSelf;
+    //    self.newsmode.newsDelegate = weakSelf;
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    //    self.newsTableView.dataSource = nil;
+    //    self.newsTableView.delegate = nil;
+    //    self.newsmode.newsDelegate = nil;
 }
 
 - (void)didReceiveMemoryWarning {

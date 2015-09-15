@@ -7,9 +7,15 @@
 //
 
 #import "mainTabController.h"
+#import "HTTP_METHOD.h"
+#import "MBProgressHUD+MJ.h"
 
-@interface mainTabController ()
+#define request_url  @"https://233.smartki.sinaapp.com/smartki_api_view.php"
 
+@interface mainTabController (){
+    
+}
+@property mainTabController *mainTab;
 @end
 
 @implementation mainTabController
@@ -19,16 +25,38 @@
     [super viewDidLoad];
     // 获取的数据 mvc传值
     NSLog(@"main:%@",self.getloginCon_Data.loginData);
+    __weak typeof(self) weakSelf = self;
+    
+    NSThread *myThread = [[NSThread alloc] initWithTarget:self selector:@selector(AFGetVarify) object:nil];
+    [myThread start];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     NSLog(@"main测试");
 }
 
+-(void)AFGetVarify{
+    __weak typeof(self) weakSelf = self;
+    
+    [HTTP_METHOD HTTP_GET_METHOD_WithURL_DIC:request_url andRequestData:@{
+                                                                          @"user":[weakSelf.getloginCon_Data.loginData objectForKey:@"user"],
+                                                                          @"token":[weakSelf.getloginCon_Data.loginData objectForKey:@"token"]
+                                                                          } callbackMethod:^(NSDictionary *back) {
+                                                                              [weakSelf getVarifyResult:back];
+    }];
+}
+
+-(void)getVarifyResult:(NSDictionary *)res{
+    if ([[res objectForKey:@"pass"] isEqualToString:@"false"]) {
+        [MBProgressHUD showError:@"请重新输入密码"];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
+
 
 /*
 #pragma mark - Navigation

@@ -19,13 +19,14 @@
 #define isLogin     @"isLogin"
 
 @interface loginController ()<UITextFieldDelegate,loginModelProtocol>{
-    
+
 }
 @property (weak, nonatomic) IBOutlet UITextField    *userTextfield;
 @property (weak, nonatomic) IBOutlet UITextField    *passTextfield;
 @property (weak, nonatomic) IBOutlet UISwitch       *remSwitch;
 @property BOOL          isMoveBack; // 如果为YES，那么当前键盘挡住了输入框，就升起view，到时候退出编辑的时候就利用这个标记来降下view，之后设置isMoveBack为NO
-@property loginModel    *loginmodel;
+@property loginModel        *loginmodel;
+@property mainTabController *mainTabCon;
 
 @end
 
@@ -33,7 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    __weak typeof(self) weakSelf = self;
     self.passTextfield.secureTextEntry = YES;
     self.loginmodel = [[loginModel alloc]init];
     
@@ -42,7 +43,7 @@
     NSString        *my_user        = [defaults valueForKey:user];
     NSString        *my_token       = [defaults valueForKey:token];
     NSString        *my_password    = [defaults valueForKey:password];
-    BOOL            my_isLogin     = [defaults boolForKey:isLogin];
+    BOOL             my_isLogin     = [defaults boolForKey:isLogin];
     
     if (my_isLogin == YES) {
         NSLog(@"my_isLogin == YES");
@@ -50,10 +51,16 @@
         NSDictionary *login_user_data = @{
                                           @"user" : my_user,
                                           @"password" : my_password,
-                                          @"my_token": my_token
+                                          @"token": my_token
                                           };
+        
+        if (weakSelf.mainTabCon == nil) {
+            weakSelf.mainTabCon = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"second"];
+            [weakSelf.loginmodel setLoginData:login_user_data];
+            [weakSelf.mainTabCon setGetloginCon_Data:weakSelf.loginmodel];
+            [weakSelf.navigationController pushViewController:weakSelf.mainTabCon animated:YES];
+        }
     }
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -102,12 +109,15 @@
             
             // 如果登陆验证成功就跳转到下一个界面
             [MBProgressHUD showSuccess:@"登陆成功"];
-            mainTabController *mainTabCon = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"second"];
+            
+            if (weakSelf.mainTabCon == nil) {
+                weakSelf.mainTabCon = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"second"];
+            }
             
             [weakSelf.loginmodel setLoginData:result_data];
-            [mainTabCon setGetloginCon_Data:weakSelf.loginmodel];
+            [weakSelf.mainTabCon setGetloginCon_Data:weakSelf.loginmodel];
             
-            [weakSelf.navigationController pushViewController:mainTabCon animated:YES];
+            [weakSelf.navigationController pushViewController:weakSelf.mainTabCon animated:YES];
             
         }else{
             [MBProgressHUD showError:@"登陆失败"];
