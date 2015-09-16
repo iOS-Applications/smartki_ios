@@ -91,6 +91,7 @@
                         <outlet property="passTextfield" destination="Snq-un-1MT" id="9V2-Bd-A6l"/>
                         <outlet property="remSwitch" destination="x1I-oo-asE" id="7pu-hS-UOp"/>
                         <outlet property="userTextfield" destination="S2S-f2-QEU" id="F1p-kU-7Jz"/>
+                        <segue destination="lW8-0d-3xY" kind="show" id="ogb-As-DJE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mf9-6R-RWH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -105,16 +106,92 @@
                         <viewControllerLayoutGuide type="top" id="I49-vc-L85"/>
                         <viewControllerLayoutGuide type="bottom" id="CPh-J3-aON"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="YLy-CJ-PHK">
+                    <view key="view" contentMode="scaleToFill" id="YLy-CJ-PHK" userLabel="控制器view">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IGe-HB-BdT" userLabel="顶部view">
+                                <rect key="frame" x="0.0" y="20" width="600" height="150"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ldi-e4-DGb">
+                                <rect key="frame" x="0.0" y="170" width="600" height="381"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ldi-e4-DGb" firstAttribute="top" secondItem="IGe-HB-BdT" secondAttribute="bottom" id="D5Y-d6-N8A"/>
+                            <constraint firstAttribute="trailing" secondItem="IGe-HB-BdT" secondAttribute="trailing" id="FL8-El-G7I"/>
+                            <constraint firstItem="IGe-HB-BdT" firstAttribute="leading" secondItem="YLy-CJ-PHK" secondAttribute="leading" id="RSY-c1-bM4"/>
+                            <constraint firstAttribute="trailing" secondItem="Ldi-e4-DGb" secondAttribute="trailing" id="bld-pq-2vv"/>
+                            <constraint firstItem="CPh-J3-aON" firstAttribute="top" secondItem="Ldi-e4-DGb" secondAttribute="bottom" id="ihe-py-1wT"/>
+                            <constraint firstItem="Ldi-e4-DGb" firstAttribute="leading" secondItem="YLy-CJ-PHK" secondAttribute="leading" id="kKi-aR-qTF"/>
+                            <constraint firstItem="IGe-HB-BdT" firstAttribute="top" secondItem="I49-vc-L85" secondAttribute="bottom" id="liE-hT-nS4"/>
+                            <constraint firstItem="IGe-HB-BdT" firstAttribute="height" secondItem="YLy-CJ-PHK" secondAttribute="height" multiplier="1:4" id="loz-ag-INJ"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 2" id="sDl-vF-Jgv" userLabel="我的文件"/>
+                    <connections>
+                        <outlet property="myfileTableView" destination="Ldi-e4-DGb" id="A2A-gj-Zpn"/>
+                        <segue destination="iKp-Rc-YYx" kind="show" id="osf-3h-4jz"/>
+                        <segue destination="j2t-pU-HYg" kind="show" id="CuZ-Nu-qBi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mFi-ut-ChN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2339" y="691"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="rIS-lz-Ddg">
+            <objects>
+                <viewController storyboardIdentifier="third" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iKp-Rc-YYx" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9Ch-qG-ngC"/>
+                        <viewControllerLayoutGuide type="bottom" id="vwA-R4-olu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NpX-JY-PNp">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5iM-sB-RMr">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitationssssssssssssssssssssssssssssssssssss ullamco laboris nisi ut aliquip ex ea sdad22dsadsacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="5iM-sB-RMr" secondAttribute="trailing" id="1UL-8Z-bXq"/>
+                            <constraint firstItem="vwA-R4-olu" firstAttribute="top" secondItem="5iM-sB-RMr" secondAttribute="bottom" id="9wc-OP-cUB"/>
+                            <constraint firstItem="5iM-sB-RMr" firstAttribute="leading" secondItem="NpX-JY-PNp" secondAttribute="leading" id="ByM-l8-K3e"/>
+                            <constraint firstItem="5iM-sB-RMr" firstAttribute="top" secondItem="9Ch-qG-ngC" secondAttribute="bottom" id="JUg-EZ-J1k"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qvd-I6-GRW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3142" y="299"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="vn7-X9-UZM">
+            <objects>
+                <viewController id="j2t-pU-HYg" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lhP-Rb-Mrk"/>
+                        <viewControllerLayoutGuide type="bottom" id="6KO-wk-aBE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aoN-Ws-wpw">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UrA-Cd-1kR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3141" y="987"/>
         </scene>
         <!--Item-->
         <scene sceneID="MH6-LA-Evs">
@@ -148,11 +225,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogq-pC-pQG" userLabel="顶部视图">
-                                <rect key="frame" x="0.0" y="20" width="600" height="200"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="200"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xw3-aS-2iz" userLabel="TableView">
-                                <rect key="frame" x="0.0" y="220" width="600" height="331"/>
+                                <rect key="frame" x="0.0" y="264" width="600" height="287"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>

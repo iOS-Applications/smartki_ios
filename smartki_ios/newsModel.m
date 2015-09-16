@@ -10,7 +10,7 @@
 #import "HTTP_METHOD.h"
 
 @implementation newsModel
-@synthesize newsData = _newsData;
+//@synthesize newsData = _newsData;
 
 #pragma mark --AFNetworking to NewsData
 -(void)AFGetNewsJsonWithURL:(NSString *)url andRequestData:(NSDictionary *)data{

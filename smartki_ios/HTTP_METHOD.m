@@ -35,9 +35,9 @@
     [manager GET:url parameters:data success:^(AFHTTPRequestOperation *operation, id responseObject) {
         // 成功执行
         // 发送的头部信息
-        //        NSLog(@"%@",operation.request.allHTTPHeaderFields);
+        NSLog(@"%@",operation.request.allHTTPHeaderFields);
         // 服务器返回的头部信息
-        //        NSLog(@"%@",operation.response);
+        NSLog(@"%@",operation.response);
         
         //        NSLog(@"responseObject: %@\n",responseObject);
         

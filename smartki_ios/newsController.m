@@ -22,7 +22,7 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *newsTableView;
 @property newsModel     *newsmode;
-@property NSArray       *newsDataArr; // 网络请求回来的最新网盘记录数据存入这里，之后赋值tableview
+@property NSArray       *newsDataArr; // 网络请求回来的json的array记录数据存入这里，之后赋值tableview
 
 @end
 
@@ -40,7 +40,7 @@
     NSString        *my_password    = [defaults valueForKey:password];
     BOOL             my_isLogin     = [defaults boolForKey:isLogin];
     
-    self.newsmode = [[newsModel alloc]init];
+    self.newsmode = [newsModel new];
     self.newsDataArr = [NSArray new];
     
     self.newsTableView.delegate = weakSelf;
@@ -51,9 +51,10 @@
 
 // 网络请求
 -(void)getNewsDataRequestWithUser:(NSString *)userText andToken:(NSString *)tokenText{
+    __weak typeof(self) weakSelf = self;
     [MBProgressHUD showMessage:@"数据加载中"];
     [GCDQueue executeInGlobalQueue:^{
-        [self.newsmode AFGetNewsJsonWithURL:request_url andRequestData:@{
+        [weakSelf.newsmode AFGetNewsJsonWithURL:request_url andRequestData:@{
                                                                          @"action":@"newsData",
                                                                          @"user":userText,
                                                                          @"token":tokenText
@@ -87,7 +88,7 @@
         self.newsDataArr = [[NSArray alloc]initWithArray:result_Arr copyItems:YES];
         self.newsTableView.dataSource = weakSelf;
         
-        [MBProgressHUD showSuccess:@"数据加载完毕"];
+        [MBProgressHUD showSuccess:@"加载完毕"];
         [self.newsTableView reloadData]; // 刷新表格
         NSLog(@"self.news :%@,count:%lu",[self.newsDataArr[0] objectForKey:@"pan_name"],(unsigned long)self.newsDataArr.count);
     }];
