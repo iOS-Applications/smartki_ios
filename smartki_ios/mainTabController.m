@@ -66,10 +66,6 @@
     [self presentViewController:alert animated:YES completion:NULL];
 }
 
--(void)NSL{
-    NSLog(@"back!!!!!!");
-}
-
 -(void)AFGetVarify{
     __weak typeof(self) weakSelf = self;
     
