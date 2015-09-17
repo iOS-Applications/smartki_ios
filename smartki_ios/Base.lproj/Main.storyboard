@@ -91,7 +91,7 @@
                         <outlet property="passTextfield" destination="Snq-un-1MT" id="9V2-Bd-A6l"/>
                         <outlet property="remSwitch" destination="x1I-oo-asE" id="7pu-hS-UOp"/>
                         <outlet property="userTextfield" destination="S2S-f2-QEU" id="F1p-kU-7Jz"/>
-                        <segue destination="lW8-0d-3xY" kind="show" id="ogb-As-DJE"/>
+                        <segue destination="lW8-0d-3xY" kind="push" id="QiT-Vb-1XD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mf9-6R-RWH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -110,11 +110,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IGe-HB-BdT" userLabel="顶部view">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IGe-HB-BdT" userLabel="顶部view">
                                 <rect key="frame" x="0.0" y="20" width="600" height="150"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ldi-e4-DGb">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ldi-e4-DGb">
                                 <rect key="frame" x="0.0" y="170" width="600" height="381"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -157,7 +157,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5iM-sB-RMr">
                                 <rect key="frame" x="0.0" y="104" width="600" height="447"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitationssssssssssssssssssssssssssssssssssss ullamco laboris nisi ut aliquip ex ea sdad22dsadsacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitationssssssssssssssssssssssssssssssssssss ullamco laboris nisi ut aliquip ex ea sdad22dsadsacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -173,6 +173,9 @@
                                     <constraint firstAttribute="height" constant="40" id="rO2-rA-gNb"/>
                                 </constraints>
                                 <state key="normal" title="点击下载"/>
+                                <connections>
+                                    <action selector="downloadBtnClick" destination="iKp-Rc-YYx" eventType="touchUpInside" id="prn-Le-QNd"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -195,6 +198,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="downPersentLabel" destination="fWn-9r-30e" id="XTu-aI-U5A"/>
                         <outlet property="fileTextView" destination="5iM-sB-RMr" id="Bd8-XN-n3v"/>
                     </connections>
                 </viewController>
@@ -215,18 +219,54 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nxp-pP-FJA">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <rect key="frame" x="0.0" y="104" width="600" height="447"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="下载进度" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afi-Et-iR8">
+                                <rect key="frame" x="0.0" y="64" width="300" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="dUe-vF-wcx"/>
+                                    <constraint firstAttribute="width" constant="42" id="gYQ-be-f60"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="dUe-vF-wcx"/>
+                                        <exclude reference="gYQ-be-f60"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xxx-E2-rn5">
+                                <rect key="frame" x="300" y="64" width="300" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="VAR-Ai-qNF"/>
+                                </constraints>
+                                <state key="normal" title="点击下载"/>
+                                <connections>
+                                    <action selector="downBtnClick:" destination="j2t-pU-HYg" eventType="touchUpInside" id="Vvf-Fr-EuX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6KO-wk-aBE" firstAttribute="top" secondItem="nxp-pP-FJA" secondAttribute="bottom" id="FqH-3x-kv1"/>
-                            <constraint firstItem="nxp-pP-FJA" firstAttribute="leading" secondItem="aoN-Ws-wpw" secondAttribute="leading" id="aRp-8f-63m"/>
-                            <constraint firstItem="nxp-pP-FJA" firstAttribute="top" secondItem="lhP-Rb-Mrk" secondAttribute="bottom" id="sHW-A3-m4W"/>
-                            <constraint firstAttribute="trailing" secondItem="nxp-pP-FJA" secondAttribute="trailing" id="smK-ya-jEE"/>
+                            <constraint firstItem="nxp-pP-FJA" firstAttribute="leading" secondItem="aoN-Ws-wpw" secondAttribute="leading" id="4o8-A9-tUf"/>
+                            <constraint firstItem="Xxx-E2-rn5" firstAttribute="width" secondItem="afi-Et-iR8" secondAttribute="width" id="4vA-pc-y6A"/>
+                            <constraint firstAttribute="trailing" secondItem="nxp-pP-FJA" secondAttribute="trailing" id="5Ty-gF-JBw"/>
+                            <constraint firstItem="Xxx-E2-rn5" firstAttribute="top" secondItem="lhP-Rb-Mrk" secondAttribute="bottom" id="8JM-O1-TI7"/>
+                            <constraint firstItem="nxp-pP-FJA" firstAttribute="top" secondItem="Xxx-E2-rn5" secondAttribute="bottom" id="Dku-ie-rwV"/>
+                            <constraint firstItem="nxp-pP-FJA" firstAttribute="top" secondItem="Xxx-E2-rn5" secondAttribute="bottom" id="EP9-p8-9nV"/>
+                            <constraint firstItem="Xxx-E2-rn5" firstAttribute="width" secondItem="aoN-Ws-wpw" secondAttribute="width" multiplier="1:2" id="Ka0-m4-jbp"/>
+                            <constraint firstItem="Xxx-E2-rn5" firstAttribute="leading" secondItem="afi-Et-iR8" secondAttribute="trailing" id="NIY-KZ-IlQ"/>
+                            <constraint firstItem="6KO-wk-aBE" firstAttribute="top" secondItem="nxp-pP-FJA" secondAttribute="bottom" id="VVj-Eg-4ny"/>
+                            <constraint firstItem="afi-Et-iR8" firstAttribute="leading" secondItem="aoN-Ws-wpw" secondAttribute="leading" id="XNq-wy-4PQ"/>
+                            <constraint firstItem="nxp-pP-FJA" firstAttribute="top" secondItem="afi-Et-iR8" secondAttribute="bottom" id="YJT-9M-2em"/>
+                            <constraint firstItem="Xxx-E2-rn5" firstAttribute="height" secondItem="afi-Et-iR8" secondAttribute="height" id="Yj4-Sj-0Ij"/>
+                            <constraint firstItem="afi-Et-iR8" firstAttribute="top" secondItem="lhP-Rb-Mrk" secondAttribute="bottom" id="oyQ-HH-cct"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="downloadLabel" destination="afi-Et-iR8" id="Eq9-5h-K1u"/>
                         <outlet property="readImgView" destination="nxp-pP-FJA" id="aJ3-dR-Gow"/>
                     </connections>
                 </viewController>
@@ -298,14 +338,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogq-pC-pQG" userLabel="顶部视图">
-                                <rect key="frame" x="0.0" y="64" width="600" height="200"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xw3-aS-2iz" userLabel="TableView">
                                 <rect key="frame" x="0.0" y="264" width="600" height="287"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogq-pC-pQG" userLabel="顶部视图">
+                                <rect key="frame" x="0.0" y="64" width="600" height="200"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -332,6 +372,13 @@
         <scene sceneID="Uel-bU-L8R">
             <objects>
                 <tabBarController storyboardIdentifier="second" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lW8-0d-3xY" customClass="mainTabController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="agS-UT-EG8">
+                        <barButtonItem key="leftBarButtonItem" title="注销" id="yFu-P5-Yln">
+                            <connections>
+                                <action selector="signOutBtnClick:" destination="lW8-0d-3xY" id="BQk-2m-fDH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="VEN-QV-LMR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>

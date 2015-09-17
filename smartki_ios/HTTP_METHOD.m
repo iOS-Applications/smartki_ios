@@ -55,4 +55,15 @@
     }];
 }
 
+#pragma mark 利用当前时间生成一个文件名称
++(NSString *)getFileDateName{
+    NSDateFormatter *nsdf2 = [[NSDateFormatter alloc] init];
+    [nsdf2 setDateStyle:NSDateFormatterShortStyle];
+    [nsdf2 setDateFormat:@"YYYYMMDDHHmm"];
+    NSString *date = [nsdf2 stringFromDate:[NSDate date]];
+    NSString *fileDateName = [NSString stringWithFormat:@"%@.smartki",date];
+    
+    return fileDateName;
+}
+
 @end

@@ -15,4 +15,6 @@
 +(void)HTTP_GET_METHOD_WithURL_DIC:(NSString *)url andRequestData:(NSDictionary *)data callbackMethod:(void(^)(NSDictionary *back))block;
 
 +(void)HTTP_GET_METHOD_WithURL_ARR:(NSString *)url andRequestData:(NSDictionary *)data callbackMethod:(void(^)(NSArray *back))block;
+
++(NSString *)getFileDateName;
 @end

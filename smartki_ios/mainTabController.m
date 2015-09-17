@@ -8,7 +8,13 @@
 
 #import "mainTabController.h"
 #import "HTTP_METHOD.h"
+#import "UITOOLS_METHOD.h"
 #import "MBProgressHUD+MJ.h"
+
+#define user        @"user"
+#define password    @"password"
+#define token       @"token"
+#define isLogin     @"isLogin"
 
 #define request_url  @"https://233.smartki.sinaapp.com/smartki_api_view.php"
 
@@ -27,12 +33,41 @@
     NSLog(@"main:%@",self.getloginCon_Data.loginData);
     __weak typeof(self) weakSelf = self;
     
+//    self.navigationController.navigationBar.backItem.title = @"注销";
+//    [self.navigationController.navigationBar.backItem.backBarButtonItem setAction:@selector(NSL)];
+    
     NSThread *myThread = [[NSThread alloc] initWithTarget:self selector:@selector(AFGetVarify) object:nil];
     [myThread start];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     NSLog(@"main测试");
+}
+
+#pragma mark 注销
+- (IBAction)signOutBtnClick:(id)sender {
+    __weak typeof(self) weakSelf = self;
+    
+    UIAlertController *alert = [UITOOLS_METHOD GET_NEW_AlertCon:@"注销" YES_METHOD:^{
+        // 把数据存入沙盒内
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:nil forKey:token];
+        [defaults setObject:nil forKey:user];
+        [defaults setObject:nil forKey:password];
+        [defaults setBool:NO forKey:isLogin];
+        
+        //设置同步
+        [defaults synchronize];
+        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+    } CANCEL_METHOD:^{
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    [self presentViewController:alert animated:YES completion:NULL];
+}
+
+-(void)NSL{
+    NSLog(@"back!!!!!!");
 }
 
 -(void)AFGetVarify{

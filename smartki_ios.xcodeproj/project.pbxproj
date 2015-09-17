@@ -19,6 +19,7 @@
 		A12FC54C1BAA953D00C833AC /* AFDownloadRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC54B1BAA953D00C833AC /* AFDownloadRequestOperation.m */; };
 		A12FC54D1BAA953D00C833AC /* AFDownloadRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC54B1BAA953D00C833AC /* AFDownloadRequestOperation.m */; };
 		A12FC54E1BAA953D00C833AC /* AFDownloadRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC54B1BAA953D00C833AC /* AFDownloadRequestOperation.m */; };
+		A1D088A81BAAE57700A4D9D5 /* UITOOLS_METHOD.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D088A71BAAE57700A4D9D5 /* UITOOLS_METHOD.m */; };
 		A1FDD5611BA6BDA600A1F22F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FDD5601BA6BDA600A1F22F /* main.m */; };
 		A1FDD5641BA6BDA600A1F22F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FDD5631BA6BDA600A1F22F /* AppDelegate.m */; };
 		A1FDD56A1BA6BDA600A1F22F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1FDD5681BA6BDA600A1F22F /* Main.storyboard */; };
@@ -132,6 +133,8 @@
 		A12FC5481BA9746400C833AC /* testViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testViewController.m; sourceTree = "<group>"; };
 		A12FC54A1BAA953D00C833AC /* AFDownloadRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDownloadRequestOperation.h; sourceTree = "<group>"; };
 		A12FC54B1BAA953D00C833AC /* AFDownloadRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDownloadRequestOperation.m; sourceTree = "<group>"; };
+		A1D088A61BAAE57700A4D9D5 /* UITOOLS_METHOD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITOOLS_METHOD.h; sourceTree = "<group>"; };
+		A1D088A71BAAE57700A4D9D5 /* UITOOLS_METHOD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITOOLS_METHOD.m; sourceTree = "<group>"; };
 		A1FDD55C1BA6BDA600A1F22F /* smartki_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = smartki_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FDD5601BA6BDA600A1F22F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A1FDD5621BA6BDA600A1F22F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -354,6 +357,8 @@
 			children = (
 				A12FC5341BA7FF3000C833AC /* HTTP_METHOD.h */,
 				A12FC5351BA7FF3000C833AC /* HTTP_METHOD.m */,
+				A1D088A61BAAE57700A4D9D5 /* UITOOLS_METHOD.h */,
+				A1D088A71BAAE57700A4D9D5 /* UITOOLS_METHOD.m */,
 			);
 			name = Utiles;
 			sourceTree = "<group>";
@@ -570,6 +575,7 @@
 				A12FC5431BA9549900C833AC /* readfileController.m in Sources */,
 				A1FDD5B21BA6BFEF00A1F22F /* AFURLRequestSerialization.m in Sources */,
 				A1FDD5E11BA6C06E00A1F22F /* MBProgressHUD+MJ.m in Sources */,
+				A1D088A81BAAE57700A4D9D5 /* UITOOLS_METHOD.m in Sources */,
 				A1FDD6051BA7B22300A1F22F /* CocoaSecurity.m in Sources */,
 				A1FDD60A1BA7BB2600A1F22F /* mainTabController.m in Sources */,
 				A1FDD5F71BA6F32100A1F22F /* loginModel.m in Sources */,
