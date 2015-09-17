@@ -13,6 +13,12 @@
 		A12FC5361BA7FF3000C833AC /* HTTP_METHOD.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC5351BA7FF3000C833AC /* HTTP_METHOD.m */; };
 		A12FC53C1BA8598800C833AC /* myfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC53B1BA8598800C833AC /* myfileModel.m */; };
 		A12FC53F1BA93A9B00C833AC /* readfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC53E1BA93A9B00C833AC /* readfileModel.m */; };
+		A12FC5431BA9549900C833AC /* readfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC5421BA9549900C833AC /* readfileController.m */; };
+		A12FC5461BA954AD00C833AC /* readimgController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC5451BA954AD00C833AC /* readimgController.m */; };
+		A12FC5491BA9746400C833AC /* testViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC5481BA9746400C833AC /* testViewController.m */; };
+		A12FC54C1BAA953D00C833AC /* AFDownloadRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC54B1BAA953D00C833AC /* AFDownloadRequestOperation.m */; };
+		A12FC54D1BAA953D00C833AC /* AFDownloadRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC54B1BAA953D00C833AC /* AFDownloadRequestOperation.m */; };
+		A12FC54E1BAA953D00C833AC /* AFDownloadRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC54B1BAA953D00C833AC /* AFDownloadRequestOperation.m */; };
 		A1FDD5611BA6BDA600A1F22F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FDD5601BA6BDA600A1F22F /* main.m */; };
 		A1FDD5641BA6BDA600A1F22F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FDD5631BA6BDA600A1F22F /* AppDelegate.m */; };
 		A1FDD56A1BA6BDA600A1F22F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1FDD5681BA6BDA600A1F22F /* Main.storyboard */; };
@@ -118,6 +124,14 @@
 		A12FC53B1BA8598800C833AC /* myfileModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myfileModel.m; sourceTree = "<group>"; };
 		A12FC53D1BA93A9B00C833AC /* readfileModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = readfileModel.h; sourceTree = "<group>"; };
 		A12FC53E1BA93A9B00C833AC /* readfileModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = readfileModel.m; sourceTree = "<group>"; };
+		A12FC5411BA9549900C833AC /* readfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = readfileController.h; sourceTree = "<group>"; };
+		A12FC5421BA9549900C833AC /* readfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = readfileController.m; sourceTree = "<group>"; };
+		A12FC5441BA954AD00C833AC /* readimgController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = readimgController.h; sourceTree = "<group>"; };
+		A12FC5451BA954AD00C833AC /* readimgController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = readimgController.m; sourceTree = "<group>"; };
+		A12FC5471BA9746400C833AC /* testViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testViewController.h; sourceTree = "<group>"; };
+		A12FC5481BA9746400C833AC /* testViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testViewController.m; sourceTree = "<group>"; };
+		A12FC54A1BAA953D00C833AC /* AFDownloadRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDownloadRequestOperation.h; sourceTree = "<group>"; };
+		A12FC54B1BAA953D00C833AC /* AFDownloadRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDownloadRequestOperation.m; sourceTree = "<group>"; };
 		A1FDD55C1BA6BDA600A1F22F /* smartki_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = smartki_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FDD5601BA6BDA600A1F22F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A1FDD5621BA6BDA600A1F22F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -204,6 +218,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A12FC5401BA9524000C833AC /* inMyfileController */ = {
+			isa = PBXGroup;
+			children = (
+				A12FC5411BA9549900C833AC /* readfileController.h */,
+				A12FC5421BA9549900C833AC /* readfileController.m */,
+				A12FC5441BA954AD00C833AC /* readimgController.h */,
+				A12FC5451BA954AD00C833AC /* readimgController.m */,
+			);
+			name = inMyfileController;
+			sourceTree = "<group>";
+		};
 		A1FDD5531BA6BDA500A1F22F = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +272,8 @@
 			children = (
 				A1FDD5EA1BA6C09000A1F22F /* image */,
 				A1FDD5601BA6BDA600A1F22F /* main.m */,
+				A12FC5471BA9746400C833AC /* testViewController.h */,
+				A12FC5481BA9746400C833AC /* testViewController.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -297,6 +324,8 @@
 		A1FDD5941BA6BEEA00A1F22F /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
+				A12FC54A1BAA953D00C833AC /* AFDownloadRequestOperation.h */,
+				A12FC54B1BAA953D00C833AC /* AFDownloadRequestOperation.m */,
 				A1FDD5961BA6BFEF00A1F22F /* AFNetworkReachabilityManager.m */,
 				A1FDD5971BA6BFEF00A1F22F /* AFSecurityPolicy.h */,
 				A1FDD5981BA6BFEF00A1F22F /* AFSecurityPolicy.m */,
@@ -395,6 +424,7 @@
 				A1FDD60F1BA7C7AC00A1F22F /* newsController.m */,
 				A12FC52B1BA7EEB800C833AC /* myfileController.h */,
 				A12FC52C1BA7EEB800C833AC /* myfileController.m */,
+				A12FC5401BA9524000C833AC /* inMyfileController */,
 				A12FC52E1BA7EED000C833AC /* userinfoController.h */,
 				A12FC52F1BA7EED000C833AC /* userinfoController.m */,
 			);
@@ -537,6 +567,7 @@
 				A1FDD5AC1BA6BFEF00A1F22F /* AFSecurityPolicy.m in Sources */,
 				A1FDD5641BA6BDA600A1F22F /* AppDelegate.m in Sources */,
 				A1FDD5A91BA6BFEF00A1F22F /* AFNetworkReachabilityManager.m in Sources */,
+				A12FC5431BA9549900C833AC /* readfileController.m in Sources */,
 				A1FDD5B21BA6BFEF00A1F22F /* AFURLRequestSerialization.m in Sources */,
 				A1FDD5E11BA6C06E00A1F22F /* MBProgressHUD+MJ.m in Sources */,
 				A1FDD6051BA7B22300A1F22F /* CocoaSecurity.m in Sources */,
@@ -547,8 +578,11 @@
 				A1FDD5C11BA6BFEF00A1F22F /* AFURLSessionManager.m in Sources */,
 				A12FC5361BA7FF3000C833AC /* HTTP_METHOD.m in Sources */,
 				A1FDD5E71BA6C06E00A1F22F /* MBProgressHUD.m in Sources */,
+				A12FC5491BA9746400C833AC /* testViewController.m in Sources */,
+				A12FC5461BA954AD00C833AC /* readimgController.m in Sources */,
 				A1FDD5B81BA6BFEF00A1F22F /* AFHTTPRequestOperation.m in Sources */,
 				A1FDD5D51BA6C02600A1F22F /* GCDSemaphore.m in Sources */,
+				A12FC54C1BAA953D00C833AC /* AFDownloadRequestOperation.m in Sources */,
 				A1FDD5611BA6BDA600A1F22F /* main.m in Sources */,
 				A12FC52D1BA7EEB800C833AC /* myfileController.m in Sources */,
 				A1FDD5D81BA6C02600A1F22F /* GCDTimer.m in Sources */,
@@ -590,6 +624,7 @@
 				A1FDD6031BA7B22300A1F22F /* Base64.m in Sources */,
 				A1FDD5BC1BA6BFEF00A1F22F /* AFHTTPRequestOperationManager.m in Sources */,
 				A1FDD5B91BA6BFEF00A1F22F /* AFHTTPRequestOperation.m in Sources */,
+				A12FC54D1BAA953D00C833AC /* AFDownloadRequestOperation.m in Sources */,
 				A1FDD5E81BA6C06E00A1F22F /* MBProgressHUD.m in Sources */,
 				A1FDD60B1BA7BB2600A1F22F /* mainTabController.m in Sources */,
 			);
@@ -619,6 +654,7 @@
 				A1FDD6041BA7B22300A1F22F /* Base64.m in Sources */,
 				A1FDD5BD1BA6BFEF00A1F22F /* AFHTTPRequestOperationManager.m in Sources */,
 				A1FDD5BA1BA6BFEF00A1F22F /* AFHTTPRequestOperation.m in Sources */,
+				A12FC54E1BAA953D00C833AC /* AFDownloadRequestOperation.m in Sources */,
 				A1FDD5E91BA6C06E00A1F22F /* MBProgressHUD.m in Sources */,
 				A1FDD60C1BA7BB2600A1F22F /* mainTabController.m in Sources */,
 			);

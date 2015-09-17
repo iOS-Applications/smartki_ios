@@ -107,6 +107,9 @@
             [defaults setObject:[result_data objectForKey:@"password"] forKey:password];
             [defaults setBool:YES forKey:isLogin];
             
+            //设置同步
+            [defaults synchronize];
+            
             // 如果登陆验证成功就跳转到下一个界面
             [MBProgressHUD showSuccess:@"登陆成功"];
             

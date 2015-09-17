@@ -10,6 +10,9 @@
 #import "myfileModel.h"
 #import "MBProgressHUD+MJ.h"
 #import "GCD.h"
+#import "readfileModel.h"
+#import "readfileController.h"
+#import "readimgController.h"
 
 #define user            @"user"
 #define password        @"password"
@@ -17,12 +20,13 @@
 #define isLogin         @"isLogin"
 #define request_url     @"https://233.smartki.sinaapp.com/smartki_api_view.php"
 
-@interface myfileController ()<UITableViewDataSource,UITableViewDelegate,myfileModelProtocol>{
+@interface myfileController ()<UITableViewDataSource,UITableViewDelegate,myfileModelProtocol,readfileModelProtocol>{
     
 }
 @property (weak, nonatomic) IBOutlet UITableView *myfileTableView;
 @property myfileModel           *myfilemodel;
 @property NSMutableArray        *myfileDataArr; // 网络请求回来的json的array记录数据存入这里，之后赋值tableview
+@property readfileModel         *readfilemodel;
 
 @property NSInteger     start;  // 获取数据起点
 @property NSInteger     num;    // 获取数据的条数
@@ -89,11 +93,15 @@
         // 如果token不对或者网络失败
         if ([[result objectForKey:@"NETBREAK"] isEqualToString:@"NETBREAK"]) {
             [MBProgressHUD showError:@"网络故障"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                weakSelf.isRefreshing = NO;
+            });
             return;
         }
         
         if ([[result objectForKey:@"pass"] isEqualToString:@"false"]) {
-            [MBProgressHUD showError:@"加载失败"];
+            [MBProgressHUD showError:@"您的密码已过期，请重新输入"];
+            [self cancelAutoLoginState];
             [weakSelf.navigationController popViewControllerAnimated:YES];
             return;
         }
@@ -125,6 +133,7 @@
     
     float height = scrollView.contentSize.height > self.myfileTableView.frame.size.height ?self.myfileTableView.frame.size.height : scrollView.contentSize.height;
     
+    NSLog(@"sel.isRefreshing :%i",self.isRefreshing);
     if ((height - scrollView.contentSize.height + scrollView.contentOffset.y) / height > 0.2 && self.isRefreshing == NO) {
         // 调用上拉刷新方法
         
@@ -186,8 +195,85 @@
     return cell;
 }
 
+#pragma mark 点击读取文件内容
 -(void)tableView:(nonnull UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     
+    __weak typeof(self) weakSelf = self;
+    [MBProgressHUD showMessage:@"加载中"];
+    self.readfilemodel = [readfileModel new];
+    self.readfilemodel.readfileDelegate = weakSelf;
+    [GCDQueue executeInGlobalQueue:^{
+        NSString *fileType = [weakSelf.myfileDataArr[indexPath.row] objectForKey:@"pan_type"];
+        
+        // 如果是图片类型的话
+        if ([fileType isEqualToString:@"png"] || [fileType isEqualToString:@"jpg"] || [fileType isEqualToString:@"gif"] || [fileType isEqualToString:@"psd"] || [fileType isEqualToString:@"jepg"]) {
+            
+            readimgController *readimgCon = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"third_2"];
+            NSDictionary *imgDataDic = @{
+                                         @"url":[weakSelf.myfileDataArr[indexPath.row] objectForKey:@"pan_url"]
+                                         };
+            
+            [weakSelf toNextController:readimgCon andData:imgDataDic setDataMethod:^(readfileModel *model) {
+                [readimgCon setReadimg_data:model];
+            }];
+            
+            return;
+        }
+        
+        NSString *filename = [NSString stringWithFormat:@"%@.%@",[weakSelf.myfileDataArr[indexPath.row] objectForKey:@"pan_time"],fileType];
+        
+        [weakSelf.readfilemodel AFGetReadfileJsonWithURL:request_url andRequestData:@{
+                                                                             @"action":@"readFile",
+                                                                             @"user":weakSelf.my_user,
+                                                                             @"token":weakSelf.my_token,
+                                                                             @"filename":filename
+                                                                             }
+         ];
+    }];
+}
+
+#pragma mark readfileDelegate回调 文件内容json
+-(void)requestReadfileResult:(NSDictionary *)result{
+    NSLog(@"readfile Result:%@",[result objectForKey:@"filestr"]);
+    __weak typeof(self) weakSelf = self;
+    
+    [GCDQueue executeInMainQueue:^{
+        [MBProgressHUD hideHUD];
+        
+        if ([[result objectForKey:@"pass"] isEqualToString:@"fales"]) {
+            [MBProgressHUD showError:@"您的操作已经过期，请重新登录"];
+            
+            [weakSelf cancelAutoLoginState];
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+            return;
+        }else if ([[result objectForKey:@"NETBREAK"] isEqualToString:@"NETBREAK"]) {
+            [MBProgressHUD showError:@"网络故障"];
+        }else{
+            readfileController *readfileCon = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"third_1"];
+            
+            [weakSelf toNextController:readfileCon andData:result setDataMethod:^(readfileModel *model) {
+                [readfileCon setReadfile_data:model];
+            }];
+        }
+    }];
+}
+
+#pragma mark 设置跳转下一个controller的数据和控制器 还有设置函数
+-(void)toNextController:(UIViewController *)Con andData:(NSDictionary *)dataDic setDataMethod:(void(^)(readfileModel *model))block{
+    __weak typeof(self) weakSelf = self;
+    
+    [self.readfilemodel setReadfileData:dataDic];
+    block(weakSelf.readfilemodel);
+    
+    [self.navigationController pushViewController:Con animated:YES];
+}
+
+-(void)cancelAutoLoginState{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    // 取消掉自动登陆的key
+    [defaults setBool:NO forKey:isLogin];
+    //设置同步
+    [defaults synchronize];
 }
 
 -(void)viewDidAppear:(BOOL)animated{

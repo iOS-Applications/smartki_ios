@@ -7,7 +7,17 @@
 //
 
 #import "readfileModel.h"
+#import "HTTP_METHOD.h"
 
 @implementation readfileModel
+@synthesize readfileData = _readfileData;
+
+-(void)AFGetReadfileJsonWithURL:(NSString *)url andRequestData:(NSDictionary *)data{
+    __weak typeof(self) weakSelf = self;
+    
+    [HTTP_METHOD HTTP_GET_METHOD_WithURL_DIC:url andRequestData:data callbackMethod:^(NSDictionary *back) {
+        [weakSelf.readfileDelegate requestReadfileResult:back];
+    }];
+}
 
 @end
