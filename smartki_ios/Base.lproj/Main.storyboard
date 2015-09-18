@@ -59,7 +59,18 @@
                             </switch>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oXY-nN-67q" userLabel="topBlankView">
                                 <rect key="frame" x="20" y="64" width="560" height="200"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D8z-K8-zZP">
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="200"/>
+                                    </imageView>
+                                </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="D8z-K8-zZP" secondAttribute="trailing" id="4Gd-a8-Ygc"/>
+                                    <constraint firstItem="D8z-K8-zZP" firstAttribute="leading" secondItem="oXY-nN-67q" secondAttribute="leading" id="Ohm-cg-cDq"/>
+                                    <constraint firstAttribute="bottom" secondItem="D8z-K8-zZP" secondAttribute="bottom" id="ULF-5Q-rx2"/>
+                                    <constraint firstItem="D8z-K8-zZP" firstAttribute="top" secondItem="oXY-nN-67q" secondAttribute="top" id="jS3-QT-q4Y"/>
+                                </constraints>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Snq-un-1MT" userLabel="PassTextfield">
                                 <rect key="frame" x="60" y="324" width="480" height="30"/>
@@ -90,6 +101,8 @@
                     <connections>
                         <outlet property="passTextfield" destination="Snq-un-1MT" id="9V2-Bd-A6l"/>
                         <outlet property="remSwitch" destination="x1I-oo-asE" id="7pu-hS-UOp"/>
+                        <outlet property="showImgView" destination="D8z-K8-zZP" id="4Je-5H-Kpf"/>
+                        <outlet property="showView" destination="oXY-nN-67q" id="3ZY-Mn-GYs"/>
                         <outlet property="userTextfield" destination="S2S-f2-QEU" id="F1p-kU-7Jz"/>
                         <segue destination="lW8-0d-3xY" kind="push" id="QiT-Vb-1XD"/>
                     </connections>
@@ -110,12 +123,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IGe-HB-BdT" userLabel="顶部view">
-                                <rect key="frame" x="0.0" y="20" width="600" height="150"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IGe-HB-BdT" userLabel="顶部view">
+                                <rect key="frame" x="0.0" y="64" width="600" height="150"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ldi-e4-DGb">
-                                <rect key="frame" x="0.0" y="170" width="600" height="381"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ldi-e4-DGb">
+                                <rect key="frame" x="0.0" y="214" width="600" height="337"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>

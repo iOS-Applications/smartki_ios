@@ -24,6 +24,9 @@
 @property (weak, nonatomic) IBOutlet UITextField    *userTextfield;
 @property (weak, nonatomic) IBOutlet UITextField    *passTextfield;
 @property (weak, nonatomic) IBOutlet UISwitch       *remSwitch;
+@property (weak, nonatomic) IBOutlet UIView *showView;
+@property (weak, nonatomic) IBOutlet UIImageView *showImgView;
+
 @property BOOL          isMoveBack; // 如果为YES，那么当前键盘挡住了输入框，就升起view，到时候退出编辑的时候就利用这个标记来降下view，之后设置isMoveBack为NO
 @property loginModel        *loginmodel;
 @property mainTabController *mainTabCon;
@@ -37,6 +40,14 @@
     __weak typeof(self) weakSelf = self;
     self.passTextfield.secureTextEntry = YES;
     self.loginmodel = [[loginModel alloc]init];
+    self.isMoveBack = NO;
+    self.userTextfield.delegate = weakSelf;
+    self.passTextfield.delegate = weakSelf;
+    self.loginmodel.loginDelegate = weakSelf;
+    
+//    self.showView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"show.png"]];
+    self.view.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1];
+    self.showImgView.image = [UIImage imageNamed:@"show.png"];
     
     //读取上次配置/***** 密码 *****/
     NSUserDefaults  *defaults       = [NSUserDefaults standardUserDefaults];
@@ -61,6 +72,7 @@
             [weakSelf.navigationController pushViewController:weakSelf.mainTabCon animated:YES];
         }
     }
+    NSLog(@"switch %i",self.remSwitch.on);
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -99,13 +111,18 @@
         }else if ([result_pass isEqualToString:@"true"]){
             // 取出用户的数据
             NSDictionary *result_data = [result objectForKey:@"0"];
-            
             // 把数据存入沙盒内
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             [defaults setObject:[result_data objectForKey:@"token"] forKey:token];
             [defaults setObject:[result_data objectForKey:@"user"] forKey:user];
             [defaults setObject:[result_data objectForKey:@"password"] forKey:password];
-            [defaults setBool:YES forKey:isLogin];
+            
+            if (weakSelf.remSwitch.on == 1) {
+                NSLog(@"不保存密码");
+                [defaults setBool:YES forKey:isLogin];
+            }else{
+                [defaults setBool:NO forKey:isLogin];
+            }
             
             //设置同步
             [defaults synchronize];

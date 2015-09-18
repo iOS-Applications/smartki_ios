@@ -12,7 +12,7 @@
 
 +(UIAlertController *)GET_NEW_AlertCon:(NSString *)alertText YES_METHOD:(void (^)())YES_METHOD CANCEL_METHOD:(void (^)())CANCEL_METHOD{
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"dsadsa" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"提示框" preferredStyle:UIAlertControllerStyleActionSheet];
     [alert addAction:[UIAlertAction actionWithTitle:alertText style:UIAlertActionStyleDestructive handler:^(UIAlertAction * __nonnull action) {
         YES_METHOD();
     }]];

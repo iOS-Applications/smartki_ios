@@ -66,6 +66,7 @@
     [self presentViewController:alert animated:YES completion:NULL];
 }
 
+#pragma mark 判断用户的token是否正确
 -(void)AFGetVarify{
     __weak typeof(self) weakSelf = self;
     
