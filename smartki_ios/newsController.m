@@ -23,6 +23,9 @@
 @property (weak, nonatomic) IBOutlet UITableView *newsTableView;
 @property newsModel     *newsmode;
 @property NSArray       *newsDataArr; // 网络请求回来的json的array记录数据存入这里，之后赋值tableview
+@property NSString  *myUser;
+@property NSString  *myToken;
+@property BOOL      isRefreshing;
 
 @end
 
@@ -45,26 +48,36 @@
     
     self.newsTableView.delegate = weakSelf;
     self.newsmode.newsDelegate = weakSelf;
+    self.myUser = my_user;
+    self.myToken = my_token;
+    self.isRefreshing = NO;
+//    self.tabBarItem.image = [UIImage imageNamed:@"icon.png"];
+    self.tabBarItem.title = @"全站最新";
     
-    [self getNewsDataRequestWithUser:my_user andToken:my_token];
+    [self getNewsDataRequestWithUser:weakSelf.myUser andToken:weakSelf.myToken];
 }
 
 // 网络请求
 -(void)getNewsDataRequestWithUser:(NSString *)userText andToken:(NSString *)tokenText{
     __weak typeof(self) weakSelf = self;
     [MBProgressHUD showMessage:@"数据加载中"];
-    [GCDQueue executeInGlobalQueue:^{
-        [weakSelf.newsmode AFGetNewsJsonWithURL:request_url andRequestData:@{
-                                                                         @"action":@"newsData",
-                                                                         @"user":userText,
-                                                                         @"token":tokenText
-                                                                         }
-         ];
-    }];
+    
+    if (self.isRefreshing == NO) {
+        self.isRefreshing = YES;
+        [GCDQueue executeInGlobalQueue:^{
+            [weakSelf.newsmode AFGetNewsJsonWithURL:request_url andRequestData:@{
+                                                                                 @"action":@"newsData",
+                                                                                 @"user":userText,
+                                                                                 @"token":tokenText
+                                                                                 }
+             ];
+        }];
+    }
 }
 
 #pragma mark newsModelProtocol回调函数
 -(void)requestNewsResult:(NSDictionary *)result{
+
     NSArray *result_Arr = [result objectForKey:@"resp"];
     NSLog(@"newsData result:%@",result_Arr);
     
@@ -75,22 +88,27 @@
         
         // 如果token不对或者网络失败
         if ([[result objectForKey:@"NETBREAK"] isEqualToString:@"NETBREAK"]) {
+            [MBProgressHUD hideHUD];
             [MBProgressHUD showError:@"网络故障"];
+            weakSelf.isRefreshing = NO;
             return;
         }
         
         if ([[result objectForKey:@"pass"] isEqualToString:@"false"]) {
+            [MBProgressHUD hideHUD];
             [MBProgressHUD showError:@"加载失败"];
+            weakSelf.isRefreshing = NO;
             [weakSelf.navigationController popViewControllerAnimated:YES];
             return;
         }
         
-        self.newsDataArr = [[NSArray alloc]initWithArray:result_Arr copyItems:YES];
-        self.newsTableView.dataSource = weakSelf;
-        
+        weakSelf.newsDataArr = [[NSArray alloc]initWithArray:result_Arr copyItems:YES];
+        weakSelf.newsTableView.dataSource = weakSelf;
+        [MBProgressHUD hideHUD];
         [MBProgressHUD showSuccess:@"加载完毕"];
-        [self.newsTableView reloadData]; // 刷新表格
-        NSLog(@"self.news :%@,count:%lu",[self.newsDataArr[0] objectForKey:@"pan_name"],(unsigned long)self.newsDataArr.count);
+        [weakSelf.newsTableView reloadData]; // 刷新表格
+        NSLog(@"self.news :%@,count:%lu",[weakSelf.newsDataArr[0] objectForKey:@"pan_name"],(unsigned long)weakSelf.newsDataArr.count);
+        weakSelf.isRefreshing = NO;
     }];
 }
 
@@ -103,15 +121,17 @@
     //    如果内容高度小于UITableView高度，就取内容的实际高度
     
     float height = scrollView.contentSize.height > self.newsTableView.frame.size.height ?self.newsTableView.frame.size.height : scrollView.contentSize.height;
+    __weak typeof(self) weakSelf = self;
     
-    if ((height - scrollView.contentSize.height + scrollView.contentOffset.y) / height > 0.2) {
+    if ((height - scrollView.contentSize.height + scrollView.contentOffset.y) / height > 0.2 && self.isRefreshing == NO) {
         // 调用上拉刷新方法
         NSLog(@"refresh");
     }
     
-    if (- scrollView.contentOffset.y / self.newsTableView.frame.size.height > 0.2) {
+    if (- scrollView.contentOffset.y / self.newsTableView.frame.size.height > 0.2 && self.isRefreshing == NO) {
         // 调用下拉刷新方法
         NSLog(@"xia refresh");
+        [self getNewsDataRequestWithUser:weakSelf.myUser andToken:weakSelf.myToken];
     }
 }
 

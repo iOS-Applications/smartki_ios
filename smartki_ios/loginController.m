@@ -45,7 +45,7 @@
     self.passTextfield.delegate = weakSelf;
     self.loginmodel.loginDelegate = weakSelf;
     
-//    self.showView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"show.png"]];
+    //self.showView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"show.png"]];
     self.view.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1];
     self.showImgView.image = [UIImage imageNamed:@"show.png"];
     

@@ -23,6 +23,9 @@
 		A1D088AA1BAB0A9B00A4D9D5 /* show.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D088A91BAB0A9B00A4D9D5 /* show.png */; };
 		A1D088AB1BAB0A9B00A4D9D5 /* show.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D088A91BAB0A9B00A4D9D5 /* show.png */; };
 		A1D088AC1BAB0A9B00A4D9D5 /* show.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D088A91BAB0A9B00A4D9D5 /* show.png */; };
+		A1D088AE1BAB93BC00A4D9D5 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D088AD1BAB93BC00A4D9D5 /* icon.png */; };
+		A1D088AF1BAB93BC00A4D9D5 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D088AD1BAB93BC00A4D9D5 /* icon.png */; };
+		A1D088B01BAB93BC00A4D9D5 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D088AD1BAB93BC00A4D9D5 /* icon.png */; };
 		A1FDD5611BA6BDA600A1F22F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FDD5601BA6BDA600A1F22F /* main.m */; };
 		A1FDD5641BA6BDA600A1F22F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FDD5631BA6BDA600A1F22F /* AppDelegate.m */; };
 		A1FDD56A1BA6BDA600A1F22F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1FDD5681BA6BDA600A1F22F /* Main.storyboard */; };
@@ -139,6 +142,7 @@
 		A1D088A61BAAE57700A4D9D5 /* UITOOLS_METHOD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITOOLS_METHOD.h; sourceTree = "<group>"; };
 		A1D088A71BAAE57700A4D9D5 /* UITOOLS_METHOD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITOOLS_METHOD.m; sourceTree = "<group>"; };
 		A1D088A91BAB0A9B00A4D9D5 /* show.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = show.png; sourceTree = "<group>"; };
+		A1D088AD1BAB93BC00A4D9D5 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		A1FDD55C1BA6BDA600A1F22F /* smartki_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = smartki_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FDD5601BA6BDA600A1F22F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A1FDD5621BA6BDA600A1F22F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -409,6 +413,7 @@
 		A1FDD5EA1BA6C09000A1F22F /* image */ = {
 			isa = PBXGroup;
 			children = (
+				A1D088AD1BAB93BC00A4D9D5 /* icon.png */,
 				A1D088A91BAB0A9B00A4D9D5 /* show.png */,
 			);
 			name = image;
@@ -547,6 +552,7 @@
 				A1FDD56F1BA6BDA600A1F22F /* LaunchScreen.storyboard in Resources */,
 				A1FDD5E41BA6C06E00A1F22F /* MBProgressHUD.bundle in Resources */,
 				A1FDD56C1BA6BDA600A1F22F /* Assets.xcassets in Resources */,
+				A1D088AE1BAB93BC00A4D9D5 /* icon.png in Resources */,
 				A1FDD56A1BA6BDA600A1F22F /* Main.storyboard in Resources */,
 				A1D088AA1BAB0A9B00A4D9D5 /* show.png in Resources */,
 			);
@@ -556,6 +562,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1D088AF1BAB93BC00A4D9D5 /* icon.png in Resources */,
 				A1FDD5E51BA6C06E00A1F22F /* MBProgressHUD.bundle in Resources */,
 				A1D088AB1BAB0A9B00A4D9D5 /* show.png in Resources */,
 			);
@@ -565,6 +572,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1D088B01BAB93BC00A4D9D5 /* icon.png in Resources */,
 				A1FDD5E61BA6C06E00A1F22F /* MBProgressHUD.bundle in Resources */,
 				A1D088AC1BAB0A9B00A4D9D5 /* show.png in Resources */,
 			);
@@ -796,6 +804,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = smartki_ios/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-31365872-qq.com.smartki-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -807,6 +816,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = smartki_ios/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-31365872-qq.com.smartki-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";

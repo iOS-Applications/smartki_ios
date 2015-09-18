@@ -58,6 +58,9 @@
     self.num = 15;
     self.isRefreshing = NO;
     self.max_file = -1;
+//    self.tabBarItem.image = [UIImage imageNamed:@"icon.png"];
+    self.tabBarItem.title = @"我的文件";
+
     
     [self getMyfileDataRequestWithUser:self.my_user andToken:self.my_token start:self.start num:self.num];
 }
@@ -151,7 +154,7 @@
                 self.num = self.num + 15;
             }
         }
-        NSLog(@"refresh");
+//        NSLog(@"refresh");
         
         [self getMyfileDataRequestWithUser:self.my_user andToken:self.my_token start:self.start num:self.num];
         NSLog(@"request data:%ld,%ld,%@,%@",self.start,self.num,self.my_user,self.my_token);
@@ -159,7 +162,7 @@
     
     if (- scrollView.contentOffset.y / self.myfileTableView.frame.size.height > 0.2 && self.isRefreshing == NO) {
         // 调用下拉刷新方法
-        NSLog(@"xia refresh");
+//        NSLog(@"xia refresh");
         [self getMyfileDataRequestWithUser:self.my_user andToken:self.my_token start:self.start num:self.num];
     }
 }
