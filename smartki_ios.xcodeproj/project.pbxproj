@@ -14,7 +14,6 @@
 		A12FC53F1BA93A9B00C833AC /* readfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC53E1BA93A9B00C833AC /* readfileModel.m */; };
 		A12FC5431BA9549900C833AC /* readfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC5421BA9549900C833AC /* readfileController.m */; };
 		A12FC5461BA954AD00C833AC /* readimgController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC5451BA954AD00C833AC /* readimgController.m */; };
-		A12FC5491BA9746400C833AC /* testViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC5481BA9746400C833AC /* testViewController.m */; };
 		A12FC54C1BAA953D00C833AC /* AFDownloadRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC54B1BAA953D00C833AC /* AFDownloadRequestOperation.m */; };
 		A12FC54D1BAA953D00C833AC /* AFDownloadRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC54B1BAA953D00C833AC /* AFDownloadRequestOperation.m */; };
 		A12FC54E1BAA953D00C833AC /* AFDownloadRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC54B1BAA953D00C833AC /* AFDownloadRequestOperation.m */; };
@@ -134,8 +133,6 @@
 		A12FC5421BA9549900C833AC /* readfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = readfileController.m; sourceTree = "<group>"; };
 		A12FC5441BA954AD00C833AC /* readimgController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = readimgController.h; sourceTree = "<group>"; };
 		A12FC5451BA954AD00C833AC /* readimgController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = readimgController.m; sourceTree = "<group>"; };
-		A12FC5471BA9746400C833AC /* testViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testViewController.h; sourceTree = "<group>"; };
-		A12FC5481BA9746400C833AC /* testViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testViewController.m; sourceTree = "<group>"; };
 		A12FC54A1BAA953D00C833AC /* AFDownloadRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDownloadRequestOperation.h; sourceTree = "<group>"; };
 		A12FC54B1BAA953D00C833AC /* AFDownloadRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDownloadRequestOperation.m; sourceTree = "<group>"; };
 		A18BD5511BAD1F79006B3B76 /* userModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userModel.h; sourceTree = "<group>"; };
@@ -288,8 +285,6 @@
 			children = (
 				A1FDD5EA1BA6C09000A1F22F /* image */,
 				A1FDD5601BA6BDA600A1F22F /* main.m */,
-				A12FC5471BA9746400C833AC /* testViewController.h */,
-				A12FC5481BA9746400C833AC /* testViewController.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -605,7 +600,6 @@
 				A1FDD5C11BA6BFEF00A1F22F /* AFURLSessionManager.m in Sources */,
 				A12FC5361BA7FF3000C833AC /* HTTP_METHOD.m in Sources */,
 				A1FDD5E71BA6C06E00A1F22F /* MBProgressHUD.m in Sources */,
-				A12FC5491BA9746400C833AC /* testViewController.m in Sources */,
 				A12FC5461BA954AD00C833AC /* readimgController.m in Sources */,
 				A1FDD5B81BA6BFEF00A1F22F /* AFHTTPRequestOperation.m in Sources */,
 				A1FDD5D51BA6C02600A1F22F /* GCDSemaphore.m in Sources */,

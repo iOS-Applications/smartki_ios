@@ -10,6 +10,7 @@
 #import "newsModel.h"
 #import "GCD.h"
 #import "MBProgressHUD+MJ.h"
+#import "HTTP_METHOD.h"
 
 #define user            @"user"
 #define password        @"password"
@@ -17,12 +18,12 @@
 #define isLogin         @"isLogin"
 #define request_url     @"https://233.smartki.sinaapp.com/smartki_api_view.php"
 
-@interface newsController ()<UITableViewDataSource,UITableViewDelegate,newsModelProtocol>{
+@interface newsController ()<UITableViewDataSource,UITableViewDelegate>{
     
 }
 @property (weak, nonatomic) IBOutlet UITableView *newsTableView;
-@property newsModel     *newsmode;
-@property NSArray       *newsDataArr; // 网络请求回来的json的array记录数据存入这里，之后赋值tableview
+@property newsModel *head; // 数据存入链表的头结点
+
 @property NSString  *myUser;
 @property NSString  *myToken;
 @property BOOL      isRefreshing;
@@ -44,14 +45,11 @@
     NSString        *my_password    = [defaults valueForKey:password];
     BOOL             my_isLogin     = [defaults boolForKey:isLogin];
     
-    self.newsmode = [newsModel new];
-    self.newsDataArr = [NSArray new];
-    
     self.newsTableView.delegate = weakSelf;
-    self.newsmode.newsDelegate = weakSelf;
     self.myUser = my_user;
     self.myToken = my_token;
     self.isRefreshing = NO;
+    self.head = [newsModel new];
 //    self.tabBarItem.image = [UIImage imageNamed:@"icon.png"];
 //    self.tabBarItem.title = @"全站最新";
     
@@ -68,7 +66,7 @@
     if (self.isRefreshing == NO) {
         self.isRefreshing = YES;
         [GCDQueue executeInGlobalQueue:^{
-            [weakSelf.newsmode AFGetNewsJsonWithURL:request_url andRequestData:@{
+            [weakSelf AFGetNewsJsonWithURL:request_url andRequestData:@{
                                                                                  @"action":@"newsData",
                                                                                  @"user":userText,
                                                                                  @"token":tokenText
@@ -78,7 +76,7 @@
     }
 }
 
-#pragma mark newsModelProtocol回调函数
+#pragma mark 回调函数
 -(void)requestNewsResult:(NSDictionary *)result{
 
     NSArray *result_Arr = [result objectForKey:@"resp"];
@@ -105,13 +103,37 @@
             return;
         }
         
-        weakSelf.newsDataArr = [[NSArray alloc]initWithArray:result_Arr copyItems:YES];
+       
+        newsModel *p = weakSelf.head;
+        for (int i = 0; i < result_Arr.count; i++) {
+            p->next = [newsModel new];
+            p->next->id = [[result_Arr[i] objectForKey:@"id"] intValue];
+            p->next->pan_id = [[result_Arr[i] objectForKey:@"pan_id"] intValue];
+            p->next->pan_size = [[result_Arr[i] objectForKey:@"pan_size"] intValue];
+            p->next->pan_time = [[result_Arr[i] objectForKey:@"pan_time"] intValue];
+            p->next->pan_name = [result_Arr[i] objectForKey:@"pan_name"];
+            p->next->pan_type = [result_Arr[i] objectForKey:@"pan_type"];
+            p->next->pan_url = [result_Arr[i] objectForKey:@"pan_url"];
+            p->next->this_user = [result_Arr[i] objectForKey:@"user"];
+            
+            NSLog(@"*p = %@",p);
+            p = p->next;
+        }
+        
         weakSelf.newsTableView.dataSource = weakSelf;
         [MBProgressHUD hideHUD];
         [MBProgressHUD showSuccess:@"加载完毕"];
         [weakSelf.newsTableView reloadData]; // 刷新表格
-        NSLog(@"self.news :%@,count:%lu",[weakSelf.newsDataArr[0] objectForKey:@"pan_name"],(unsigned long)weakSelf.newsDataArr.count);
         weakSelf.isRefreshing = NO;
+    }];
+}
+
+#pragma mark --AFNetworking to NewsData
+-(void)AFGetNewsJsonWithURL:(NSString *)url andRequestData:(NSDictionary *)data{
+    __weak typeof(self) weakSelf = self;
+    
+    [HTTP_METHOD HTTP_GET_METHOD_WithURL_DIC:url andRequestData:data callbackMethod:^(NSDictionary *back) {
+        [weakSelf requestNewsResult:back];
     }];
 }
 
@@ -143,13 +165,18 @@
 }
 
 -(NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.newsDataArr.count;
+    int returnCount = 0;
+    newsModel *temp = self.head->next;
+    while (temp) {
+        returnCount += 1;
+        temp = temp->next;
+    }
+    
+    NSLog(@"returnCount= %d",returnCount);
+    return returnCount;
 }
 
 -(nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-//    NSLog(@"temp=%d",self.temp);
-//    self.temp += 1;
-    
     static NSString *ID = @"C1"; // 创建静态缓存池
     
     // 1.从缓存池中取出可循环利用的cell
@@ -167,13 +194,26 @@
     cell.textLabel.textColor = [UIColor blackColor];
     cell.textLabel.textAlignment = 1;
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@.%@",[self.newsDataArr[indexPath.row] objectForKey:@"pan_name"],[self.newsDataArr[indexPath.row] objectForKey:@"pan_type"]];
+    newsModel *tempModel = [self getThisRowsData:indexPath.row];
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%@.%@",tempModel->pan_name,tempModel->pan_type];
     
     return cell;// web/dodelete.jsp?goodsId=*
 }
 
 -(void)tableView:(nonnull UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     
+}
+
+#pragma mark 得到该行的数据-链表结点
+-(newsModel *)getThisRowsData:(NSInteger)row{
+    newsModel *p = self.head->next;
+    
+    for (int i = 0; i < row; i++) {
+        p = p->next;
+    }
+    
+    return p;
 }
 
 -(void)viewDidAppear:(BOOL)animated{

@@ -7,14 +7,29 @@
 //
 
 #import <Foundation/Foundation.h>
-@protocol newsModelProtocol
-- (void)requestNewsResult:(NSDictionary *)result;
-@end
 
-@interface newsModel : NSObject
-@property(strong,nonatomic)id<newsModelProtocol>newsDelegate;
+// 这是一个链表的数据模型
+@interface newsModel : NSObject{
+@public int id;
+@public int pan_id;
+@public int pan_size;
+@public int pan_time;
+@public NSString *pan_name;
+@public NSString *pan_type;
+@public NSString *pan_url;
+@public NSString *this_user;
+@public newsModel *next;
+}
 
-//@property(nonatomic,retain) NSDictionary *newsData;
--(void)AFGetNewsJsonWithURL:(NSString *)url andRequestData:(NSDictionary *)data;
+/* 例:
+ id = 13;
+ "pan_id" = 80;
+ "pan_name" = phpAJAXlogin;
+ "pan_size" = 31798;
+ "pan_time" = 150318151423;
+ "pan_type" = zip;
+ "pan_url" = "http://smartki-class.stor.sinaapp.com/150318151423.zip";
+ user = numberwolf;
+ */
 
 @end
