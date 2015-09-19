@@ -28,6 +28,7 @@
     __weak typeof(self) weakSelf = self;    
     self.file_text = [weakSelf.readfile_data.readfileData objectForKey:@"filestr"];
     self.fileTextView.text = weakSelf.file_text;
+    self.title = @"dsadsa";
 }
 
 

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A12FC52D1BA7EEB800C833AC /* myfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC52C1BA7EEB800C833AC /* myfileController.m */; };
-		A12FC5301BA7EED000C833AC /* userinfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC52F1BA7EED000C833AC /* userinfoController.m */; };
 		A12FC5331BA7F81200C833AC /* newsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC5321BA7F81200C833AC /* newsModel.m */; };
 		A12FC5361BA7FF3000C833AC /* HTTP_METHOD.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC5351BA7FF3000C833AC /* HTTP_METHOD.m */; };
 		A12FC53C1BA8598800C833AC /* myfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC53B1BA8598800C833AC /* myfileModel.m */; };
@@ -19,6 +18,8 @@
 		A12FC54C1BAA953D00C833AC /* AFDownloadRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC54B1BAA953D00C833AC /* AFDownloadRequestOperation.m */; };
 		A12FC54D1BAA953D00C833AC /* AFDownloadRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC54B1BAA953D00C833AC /* AFDownloadRequestOperation.m */; };
 		A12FC54E1BAA953D00C833AC /* AFDownloadRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A12FC54B1BAA953D00C833AC /* AFDownloadRequestOperation.m */; };
+		A18BD5531BAD1F79006B3B76 /* userModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A18BD5521BAD1F79006B3B76 /* userModel.m */; settings = {ASSET_TAGS = (); }; };
+		A18BD5561BAD20B5006B3B76 /* userController.m in Sources */ = {isa = PBXBuildFile; fileRef = A18BD5551BAD20B5006B3B76 /* userController.m */; settings = {ASSET_TAGS = (); }; };
 		A1D088A81BAAE57700A4D9D5 /* UITOOLS_METHOD.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D088A71BAAE57700A4D9D5 /* UITOOLS_METHOD.m */; };
 		A1D088AA1BAB0A9B00A4D9D5 /* show.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D088A91BAB0A9B00A4D9D5 /* show.png */; };
 		A1D088AB1BAB0A9B00A4D9D5 /* show.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D088A91BAB0A9B00A4D9D5 /* show.png */; };
@@ -121,8 +122,6 @@
 /* Begin PBXFileReference section */
 		A12FC52B1BA7EEB800C833AC /* myfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myfileController.h; sourceTree = "<group>"; };
 		A12FC52C1BA7EEB800C833AC /* myfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myfileController.m; sourceTree = "<group>"; };
-		A12FC52E1BA7EED000C833AC /* userinfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userinfoController.h; sourceTree = "<group>"; };
-		A12FC52F1BA7EED000C833AC /* userinfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = userinfoController.m; sourceTree = "<group>"; };
 		A12FC5311BA7F81200C833AC /* newsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newsModel.h; sourceTree = "<group>"; };
 		A12FC5321BA7F81200C833AC /* newsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newsModel.m; sourceTree = "<group>"; };
 		A12FC5341BA7FF3000C833AC /* HTTP_METHOD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTP_METHOD.h; sourceTree = "<group>"; };
@@ -139,6 +138,10 @@
 		A12FC5481BA9746400C833AC /* testViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testViewController.m; sourceTree = "<group>"; };
 		A12FC54A1BAA953D00C833AC /* AFDownloadRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDownloadRequestOperation.h; sourceTree = "<group>"; };
 		A12FC54B1BAA953D00C833AC /* AFDownloadRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDownloadRequestOperation.m; sourceTree = "<group>"; };
+		A18BD5511BAD1F79006B3B76 /* userModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userModel.h; sourceTree = "<group>"; };
+		A18BD5521BAD1F79006B3B76 /* userModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = userModel.m; sourceTree = "<group>"; };
+		A18BD5541BAD20B5006B3B76 /* userController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userController.h; sourceTree = "<group>"; };
+		A18BD5551BAD20B5006B3B76 /* userController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = userController.m; sourceTree = "<group>"; };
 		A1D088A61BAAE57700A4D9D5 /* UITOOLS_METHOD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITOOLS_METHOD.h; sourceTree = "<group>"; };
 		A1D088A71BAAE57700A4D9D5 /* UITOOLS_METHOD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITOOLS_METHOD.m; sourceTree = "<group>"; };
 		A1D088A91BAB0A9B00A4D9D5 /* show.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = show.png; sourceTree = "<group>"; };
@@ -236,6 +239,8 @@
 				A12FC5421BA9549900C833AC /* readfileController.m */,
 				A12FC5441BA954AD00C833AC /* readimgController.h */,
 				A12FC5451BA954AD00C833AC /* readimgController.m */,
+				A18BD5541BAD20B5006B3B76 /* userController.h */,
+				A18BD5551BAD20B5006B3B76 /* userController.m */,
 			);
 			name = inMyfileController;
 			sourceTree = "<group>";
@@ -328,6 +333,8 @@
 				A12FC53B1BA8598800C833AC /* myfileModel.m */,
 				A12FC53D1BA93A9B00C833AC /* readfileModel.h */,
 				A12FC53E1BA93A9B00C833AC /* readfileModel.m */,
+				A18BD5511BAD1F79006B3B76 /* userModel.h */,
+				A18BD5521BAD1F79006B3B76 /* userModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -440,8 +447,6 @@
 				A12FC52B1BA7EEB800C833AC /* myfileController.h */,
 				A12FC52C1BA7EEB800C833AC /* myfileController.m */,
 				A12FC5401BA9524000C833AC /* inMyfileController */,
-				A12FC52E1BA7EED000C833AC /* userinfoController.h */,
-				A12FC52F1BA7EED000C833AC /* userinfoController.m */,
 			);
 			name = TabController;
 			sourceTree = "<group>";
@@ -606,10 +611,11 @@
 				A1FDD5D51BA6C02600A1F22F /* GCDSemaphore.m in Sources */,
 				A12FC54C1BAA953D00C833AC /* AFDownloadRequestOperation.m in Sources */,
 				A1FDD5611BA6BDA600A1F22F /* main.m in Sources */,
+				A18BD5531BAD1F79006B3B76 /* userModel.m in Sources */,
 				A12FC52D1BA7EEB800C833AC /* myfileController.m in Sources */,
 				A1FDD5D81BA6C02600A1F22F /* GCDTimer.m in Sources */,
-				A12FC5301BA7EED000C833AC /* userinfoController.m in Sources */,
 				A1FDD5B51BA6BFEF00A1F22F /* AFURLResponseSerialization.m in Sources */,
+				A18BD5561BAD20B5006B3B76 /* userController.m in Sources */,
 				A1FDD5BE1BA6BFEF00A1F22F /* AFHTTPSessionManager.m in Sources */,
 				A12FC5331BA7F81200C833AC /* newsModel.m in Sources */,
 				A1FDD5AF1BA6BFEF00A1F22F /* AFURLConnectionOperation.m in Sources */,

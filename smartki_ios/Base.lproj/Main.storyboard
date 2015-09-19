@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8121.20" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="lSc-3d-Pbw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="lSc-3d-Pbw">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.16"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -112,7 +112,7 @@
             </objects>
             <point key="canvasLocation" x="671" y="778"/>
         </scene>
-        <!--Item 2-->
+        <!--我的文件-->
         <scene sceneID="Uq5-gN-WTI">
             <objects>
                 <viewController storyboardIdentifier="second_two" useStoryboardIdentifierAsRestorationIdentifier="YES" id="p3k-Zx-EhC" customClass="myfileController" sceneMemberID="viewController">
@@ -145,7 +145,7 @@
                             <constraint firstItem="IGe-HB-BdT" firstAttribute="height" secondItem="YLy-CJ-PHK" secondAttribute="height" multiplier="1:4" id="loz-ag-INJ"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="sDl-vF-Jgv" userLabel="我的文件"/>
+                    <tabBarItem key="tabBarItem" title="我的文件" id="sDl-vF-Jgv" userLabel="我的文件"/>
                     <connections>
                         <outlet property="myfileTableView" destination="Ldi-e4-DGb" id="A2A-gj-Zpn"/>
                         <segue destination="iKp-Rc-YYx" kind="show" id="osf-3h-4jz"/>
@@ -288,43 +288,10 @@
             </objects>
             <point key="canvasLocation" x="3141" y="987"/>
         </scene>
-        <!--Test View Controller-->
-        <scene sceneID="596-dl-UG8">
-            <objects>
-                <viewController id="5bL-jB-caK" customClass="testViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Sd8-ai-rOp"/>
-                        <viewControllerLayoutGuide type="bottom" id="s5i-CO-shR"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Tn1-MJ-YfS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Vm-tr-PML">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="9Vm-tr-PML" secondAttribute="trailing" id="34K-DN-ryr"/>
-                            <constraint firstItem="s5i-CO-shR" firstAttribute="top" secondItem="9Vm-tr-PML" secondAttribute="bottom" id="LuZ-T6-CzG"/>
-                            <constraint firstItem="9Vm-tr-PML" firstAttribute="leading" secondItem="Tn1-MJ-YfS" secondAttribute="leading" id="aeN-Gj-gYx"/>
-                            <constraint firstItem="9Vm-tr-PML" firstAttribute="top" secondItem="Sd8-ai-rOp" secondAttribute="bottom" id="uQn-sj-Xmu"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="webview" destination="9Vm-tr-PML" id="Yu4-1E-1Ty"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="N7b-mN-0Rs" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3277" y="1698"/>
-        </scene>
-        <!--Item-->
+        <!--个人信息-->
         <scene sceneID="MH6-LA-Evs">
             <objects>
-                <viewController id="aH9-j8-ba6" customClass="userinfoController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="second_three" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aH9-j8-ba6" customClass="userController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pNI-CV-nIN"/>
                         <viewControllerLayoutGuide type="bottom" id="P6l-VH-2Go"/>
@@ -334,13 +301,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="HTe-zq-ssJ" userLabel="个人信息"/>
+                    <tabBarItem key="tabBarItem" title="个人信息" id="HTe-zq-ssJ" userLabel="个人信息"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WN8-My-lkh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2327" y="1357"/>
         </scene>
-        <!--Item 1-->
+        <!--最新信息-->
         <scene sceneID="kwN-lG-DP4">
             <objects>
                 <viewController storyboardIdentifier="second_one" useStoryboardIdentifierAsRestorationIdentifier="YES" id="MGi-tg-hGs" customClass="newsController" sceneMemberID="viewController">
@@ -384,7 +351,7 @@
                             <constraint firstItem="8Vd-6C-jnM" firstAttribute="top" secondItem="xw3-aS-2iz" secondAttribute="bottom" id="nnp-mA-hK0"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="t9P-US-KwF" userLabel="最新信息"/>
+                    <tabBarItem key="tabBarItem" title="最新信息" id="t9P-US-KwF" userLabel="最新信息"/>
                     <connections>
                         <outlet property="newsTableView" destination="xw3-aS-2iz" id="rDx-tp-qRx"/>
                     </connections>

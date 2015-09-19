@@ -59,7 +59,7 @@
     self.isRefreshing = NO;
     self.max_file = -1;
 //    self.tabBarItem.image = [UIImage imageNamed:@"icon.png"];
-    self.tabBarItem.title = @"我的文件";
+//    self.tabBarItem.title = @"我的文件";
 
     
     [self getMyfileDataRequestWithUser:self.my_user andToken:self.my_token start:self.start num:self.num];

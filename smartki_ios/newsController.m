@@ -26,6 +26,7 @@
 @property NSString  *myUser;
 @property NSString  *myToken;
 @property BOOL      isRefreshing;
+//@property int       temp;
 
 @end
 
@@ -52,9 +53,11 @@
     self.myToken = my_token;
     self.isRefreshing = NO;
 //    self.tabBarItem.image = [UIImage imageNamed:@"icon.png"];
-    self.tabBarItem.title = @"全站最新";
+//    self.tabBarItem.title = @"全站最新";
     
     [self getNewsDataRequestWithUser:weakSelf.myUser andToken:weakSelf.myToken];
+    
+//    self.temp = 0;
 }
 
 // 网络请求
@@ -144,6 +147,9 @@
 }
 
 -(nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+//    NSLog(@"temp=%d",self.temp);
+//    self.temp += 1;
+    
     static NSString *ID = @"C1"; // 创建静态缓存池
     
     // 1.从缓存池中取出可循环利用的cell
