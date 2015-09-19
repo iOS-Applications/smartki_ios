@@ -24,10 +24,10 @@
 @property (weak, nonatomic) IBOutlet UITextField    *userTextfield;
 @property (weak, nonatomic) IBOutlet UITextField    *passTextfield;
 @property (weak, nonatomic) IBOutlet UISwitch       *remSwitch;
-@property (weak, nonatomic) IBOutlet UIView *showView;
-@property (weak, nonatomic) IBOutlet UIImageView *showImgView;
+@property (weak, nonatomic) IBOutlet UIView         *showView;
+@property (weak, nonatomic) IBOutlet UIImageView    *showImgView;
 
-@property BOOL          isMoveBack; // 如果为YES，那么当前键盘挡住了输入框，就升起view，到时候退出编辑的时候就利用这个标记来降下view，之后设置isMoveBack为NO
+@property BOOL              isMoveBack; // 如果为YES，那么当前键盘挡住了输入框，就升起view，到时候退出编辑的时候就利用这个标记来降下view，之后设置isMoveBack为NO
 @property loginModel        *loginmodel;
 @property mainTabController *mainTabCon;
 
