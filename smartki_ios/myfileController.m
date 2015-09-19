@@ -13,6 +13,7 @@
 #import "readfileModel.h"
 #import "readfileController.h"
 #import "readimgController.h"
+#import "HTTP_METHOD.h"
 
 #define user            @"user"
 #define password        @"password"
@@ -20,12 +21,11 @@
 #define isLogin         @"isLogin"
 #define request_url     @"https://233.smartki.sinaapp.com/smartki_api_view.php"
 
-@interface myfileController ()<UITableViewDataSource,UITableViewDelegate,myfileModelProtocol,readfileModelProtocol>{
+@interface myfileController ()<UITableViewDataSource,UITableViewDelegate>{
     
 }
 @property (weak, nonatomic) IBOutlet UITableView *myfileTableView;
-@property myfileModel           *myfilemodel;
-@property NSMutableArray        *myfileDataArr; // 网络请求回来的json的array记录数据存入这里，之后赋值tableview
+@property myfileModel           *head;
 @property readfileModel         *readfilemodel;
 
 @property NSInteger     start;  // 获取数据起点
@@ -49,11 +49,10 @@
     self.my_user        = [defaults valueForKey:user];
     self.my_token       = [defaults valueForKey:token];
     
-    self.myfilemodel = [myfileModel new];
-    self.myfileDataArr = [NSMutableArray new];
+    self.head = [myfileModel new];
     
     self.myfileTableView.delegate = weakSelf;
-    self.myfilemodel.myfileDelegate = weakSelf;
+
     self.start = 0;
     self.num = 15;
     self.isRefreshing = NO;
@@ -73,7 +72,7 @@
         self.isRefreshing = YES;
         [MBProgressHUD showMessage:@"数据加载中"];
         [GCDQueue executeInGlobalQueue:^{
-            [weakSelf.myfilemodel AFGetMyfileJsonWithURL:request_url andRequestData:@{
+            [weakSelf AFGetMyfileJsonWithURL:request_url andRequestData:@{
                                                                                       @"action":@"getMyfile",
                                                                                       @"user":userText,
                                                                                       @"token":tokenText,
@@ -83,6 +82,14 @@
              ];
         }];
     }
+}
+
+-(void)AFGetMyfileJsonWithURL:(NSString *)url andRequestData:(NSDictionary *)data{
+    __weak typeof(self) weakSelf = self;
+    
+    [HTTP_METHOD HTTP_GET_METHOD_WithURL_DIC:url andRequestData:data callbackMethod:^(NSDictionary *back) {
+        [weakSelf requestMyfileResult:back];
+    }];
 }
 
 -(void)requestMyfileResult:(NSDictionary *)result{
@@ -108,11 +115,20 @@
             [weakSelf.navigationController popViewControllerAnimated:YES];
             return;
         }
-        if (weakSelf.myfileDataArr.count <= 1) {
+        
+        myfileModel *tempModel = weakSelf.head;
+        
+        if (weakSelf.max_file <= 1) {
             weakSelf.max_file =[[result objectForKey:@"count"] integerValue];
-            weakSelf.myfileDataArr = [[NSMutableArray alloc]initWithArray:result_Arr copyItems:YES];
+            
+            // 存数据至链表模型
+            [weakSelf addDataWithArray:result_Arr andModel:tempModel];
         }else{
-            [weakSelf.myfileDataArr addObjectsFromArray:result_Arr];
+            while (tempModel->next) {
+                tempModel = tempModel->next;
+            }
+            
+            [weakSelf addDataWithArray:result_Arr andModel:tempModel];
         }
         
         weakSelf.myfileTableView.dataSource = weakSelf;
@@ -124,6 +140,36 @@
             weakSelf.isRefreshing = NO;
         });
     }];
+}
+
+#pragma mark 填充数据
+-(void)addDataWithArray:(NSArray *)array andModel:(myfileModel *)model{
+    for (int i = 0; i < array.count; i++) {
+        
+        model->next = [myfileModel new];
+        model->next->id = [[array[i] objectForKey:@"id"] intValue];
+        model->next->pan_id = [[array[i] objectForKey:@"pan_id"] intValue];
+        model->next->pan_size = [array[i] objectForKey:@"pan_size"];
+        model->next->pan_time = [array[i] objectForKey:@"pan_time"];
+        model->next->pan_name = [array[i] objectForKey:@"pan_name"];
+        model->next->pan_type = [array[i] objectForKey:@"pan_type"];
+        model->next->pan_url = [array[i] objectForKey:@"pan_url"];
+        model->next->this_user = [array[i] objectForKey:@"user"];
+        
+        model = model->next;
+    }
+}
+
+#pragma mark 得到当前显示的数据总量
+-(int)getDataCount{
+    myfileModel *p = self.head->next;
+    int count = 0;
+    while (p) {
+        count += 1;
+        p = p->next;
+    }
+    
+    return count;
 }
 
 #pragma mark 上拉和下拉刷新
@@ -154,7 +200,6 @@
                 self.num = self.num + 15;
             }
         }
-//        NSLog(@"refresh");
         
         [self getMyfileDataRequestWithUser:self.my_user andToken:self.my_token start:self.start num:self.num];
         NSLog(@"request data:%ld,%ld,%@,%@",self.start,self.num,self.my_user,self.my_token);
@@ -162,7 +207,6 @@
     
     if (- scrollView.contentOffset.y / self.myfileTableView.frame.size.height > 0.2 && self.isRefreshing == NO) {
         // 调用下拉刷新方法
-//        NSLog(@"xia refresh");
         [self getMyfileDataRequestWithUser:self.my_user andToken:self.my_token start:self.start num:self.num];
     }
 }
@@ -172,7 +216,7 @@
 }
 
 -(NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.myfileDataArr.count;
+    return [self getDataCount];
 }
 
 -(nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
@@ -193,7 +237,9 @@
     cell.textLabel.textColor = [UIColor blackColor];
     cell.textLabel.textAlignment = 1;
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@.%@",[self.myfileDataArr[indexPath.row] objectForKey:@"pan_name"],[self.myfileDataArr[indexPath.row] objectForKey:@"pan_type"]];
+    myfileModel *tempModel = [self getThisRowsData:indexPath.row];
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%@.%@",tempModel->pan_name,tempModel->pan_type];
     
     return cell;
 }
@@ -204,16 +250,18 @@
     __weak typeof(self) weakSelf = self;
     [MBProgressHUD showMessage:@"加载中"];
     self.readfilemodel = [readfileModel new];
-    self.readfilemodel.readfileDelegate = weakSelf;
+    
+    myfileModel *fileTempModel = [self getThisRowsData:indexPath.row];
     [GCDQueue executeInGlobalQueue:^{
-        NSString *fileType = [weakSelf.myfileDataArr[indexPath.row] objectForKey:@"pan_type"];
+        NSString *fileType = fileTempModel->pan_type;
         
         // 如果是图片类型的话
         if ([fileType isEqualToString:@"png"] || [fileType isEqualToString:@"jpg"] || [fileType isEqualToString:@"gif"] || [fileType isEqualToString:@"psd"] || [fileType isEqualToString:@"jepg"]) {
             
             readimgController *readimgCon = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"third_2"];
+            
             NSDictionary *imgDataDic = @{
-                                         @"url":[weakSelf.myfileDataArr[indexPath.row] objectForKey:@"pan_url"]
+                                         @"url":fileTempModel->pan_url
                                          };
             
             [weakSelf toNextController:readimgCon andData:imgDataDic setDataMethod:^(readfileModel *model) {
@@ -223,9 +271,10 @@
             return;
         }
         
-        NSString *filename = [NSString stringWithFormat:@"%@.%@",[weakSelf.myfileDataArr[indexPath.row] objectForKey:@"pan_time"],fileType];
+        // 如果不是图片的话
+        NSString *filename = [NSString stringWithFormat:@"%@.%@",fileTempModel->pan_time,fileType];
         
-        [weakSelf.readfilemodel AFGetReadfileJsonWithURL:request_url andRequestData:@{
+        [weakSelf AFGetReadfileJsonWithURL:request_url andRequestData:@{
                                                                              @"action":@"readFile",
                                                                              @"user":weakSelf.my_user,
                                                                              @"token":weakSelf.my_token,
@@ -233,6 +282,27 @@
                                                                              }
          ];
     }];
+}
+
+
+#pragma mark 得到readfileController需要的查看的数据
+-(void)AFGetReadfileJsonWithURL:(NSString *)url andRequestData:(NSDictionary *)data{
+    __weak typeof(self) weakSelf = self;
+    
+    [HTTP_METHOD HTTP_GET_METHOD_WithURL_DIC:url andRequestData:data callbackMethod:^(NSDictionary *back) {
+        [weakSelf requestReadfileResult:back];
+    }];
+}
+
+#pragma mark 得到该行的数据-链表结点
+-(myfileModel *)getThisRowsData:(NSInteger)row{
+    myfileModel *p = self.head->next;
+    
+    for (int i = 0; i < row; i++) {
+        p = p->next;
+    }
+    
+    return p;
 }
 
 #pragma mark readfileDelegate回调 文件内容json

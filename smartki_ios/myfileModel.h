@@ -7,14 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-@protocol myfileModelProtocol
-- (void)requestMyfileResult:(NSDictionary *)result;
-@end
 
-@interface myfileModel : NSObject
-@property(strong,nonatomic)id<myfileModelProtocol>myfileDelegate;
-@property(nonatomic,retain) NSDictionary *myfileData;
-
--(void)AFGetMyfileJsonWithURL:(NSString *)url andRequestData:(NSDictionary *)data;
+@interface myfileModel : NSObject{
+@public int         id;
+@public int         pan_id;
+@public NSString    *pan_size;
+@public NSString    *pan_time;
+@public NSString    *pan_name;
+@public NSString    *pan_type;
+@public NSString    *pan_url;
+@public NSString    *this_user;
+@public myfileModel *next;
+}
 
 @end

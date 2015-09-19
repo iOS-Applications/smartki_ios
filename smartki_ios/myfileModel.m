@@ -10,13 +10,4 @@
 #import "HTTP_METHOD.h"
 
 @implementation myfileModel
-@synthesize myfileData = _myfileData;
-
--(void)AFGetMyfileJsonWithURL:(NSString *)url andRequestData:(NSDictionary *)data{
-    __weak typeof(self) weakSelf = self;
-    
-    [HTTP_METHOD HTTP_GET_METHOD_WithURL_DIC:url andRequestData:data callbackMethod:^(NSDictionary *back) {
-        [weakSelf.myfileDelegate requestMyfileResult:back];
-    }];
-}
 @end

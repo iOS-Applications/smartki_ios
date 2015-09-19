@@ -105,20 +105,7 @@
         
        
         newsModel *p = weakSelf.head;
-        for (int i = 0; i < result_Arr.count; i++) {
-            p->next = [newsModel new];
-            p->next->id = [[result_Arr[i] objectForKey:@"id"] intValue];
-            p->next->pan_id = [[result_Arr[i] objectForKey:@"pan_id"] intValue];
-            p->next->pan_size = [[result_Arr[i] objectForKey:@"pan_size"] intValue];
-            p->next->pan_time = [[result_Arr[i] objectForKey:@"pan_time"] intValue];
-            p->next->pan_name = [result_Arr[i] objectForKey:@"pan_name"];
-            p->next->pan_type = [result_Arr[i] objectForKey:@"pan_type"];
-            p->next->pan_url = [result_Arr[i] objectForKey:@"pan_url"];
-            p->next->this_user = [result_Arr[i] objectForKey:@"user"];
-            
-            NSLog(@"*p = %@",p);
-            p = p->next;
-        }
+        [weakSelf addDataWithArray:result_Arr andModel:p];
         
         weakSelf.newsTableView.dataSource = weakSelf;
         [MBProgressHUD hideHUD];
@@ -126,6 +113,36 @@
         [weakSelf.newsTableView reloadData]; // 刷新表格
         weakSelf.isRefreshing = NO;
     }];
+}
+
+#pragma mark 填充数据
+-(void)addDataWithArray:(NSArray *)array andModel:(newsModel *)model{
+    for (int i = 0; i < array.count; i++) {
+        
+        model->next = [newsModel new];
+        model->next->id = [[array[i] objectForKey:@"id"] intValue];
+        model->next->pan_id = [[array[i] objectForKey:@"pan_id"] intValue];
+        model->next->pan_size = [array[i] objectForKey:@"pan_size"];
+        model->next->pan_time = [array[i] objectForKey:@"pan_time"];
+        model->next->pan_name = [array[i] objectForKey:@"pan_name"];
+        model->next->pan_type = [array[i] objectForKey:@"pan_type"];
+        model->next->pan_url = [array[i] objectForKey:@"pan_url"];
+        model->next->this_user = [array[i] objectForKey:@"user"];
+        
+        model = model->next;
+    }
+}
+
+#pragma mark 得到当前显示的数据总量
+-(int)getDataCount{
+    newsModel *p = self.head->next;
+    int count = 0;
+    while (p) {
+        count += 1;
+        p = p->next;
+    }
+    
+    return count;
 }
 
 #pragma mark --AFNetworking to NewsData
@@ -165,15 +182,7 @@
 }
 
 -(NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    int returnCount = 0;
-    newsModel *temp = self.head->next;
-    while (temp) {
-        returnCount += 1;
-        temp = temp->next;
-    }
-    
-    NSLog(@"returnCount= %d",returnCount);
-    return returnCount;
+    return [self getDataCount];
 }
 
 -(nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{

@@ -7,14 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-@protocol readfileModelProtocol
-- (void)requestReadfileResult:(NSDictionary *)result;
-@end
 
 @interface readfileModel : NSObject
-@property(strong,nonatomic)id<readfileModelProtocol>readfileDelegate;
 @property(nonatomic,retain) NSDictionary *readfileData;
-
--(void)AFGetReadfileJsonWithURL:(NSString *)url andRequestData:(NSDictionary *)data;
 
 @end

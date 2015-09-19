@@ -10,15 +10,15 @@
 
 // 这是一个链表的数据模型
 @interface newsModel : NSObject{
-@public int id;
-@public int pan_id;
-@public int pan_size;
-@public int pan_time;
-@public NSString *pan_name;
-@public NSString *pan_type;
-@public NSString *pan_url;
-@public NSString *this_user;
-@public newsModel *next;
+@public int         id;
+@public int         pan_id;
+@public NSString    *pan_size;
+@public NSString    *pan_time;
+@public NSString    *pan_name;
+@public NSString    *pan_type;
+@public NSString    *pan_url;
+@public NSString    *this_user;
+@public newsModel   *next;
 }
 
 /* 例:
