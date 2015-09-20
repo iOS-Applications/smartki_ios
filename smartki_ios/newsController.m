@@ -18,9 +18,11 @@
 #define isLogin         @"isLogin"
 #define request_url     @"https://233.smartki.sinaapp.com/smartki_api_view.php"
 
-@interface newsController ()<UITableViewDataSource,UITableViewDelegate>{
+@interface newsController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>{
     
 }
+@property (weak, nonatomic) IBOutlet UIScrollView *imgScrollView;
+@property (weak, nonatomic) IBOutlet UIPageControl *imgPageControl;
 @property (weak, nonatomic) IBOutlet UITableView *newsTableView;
 @property newsModel *head; // 数据存入链表的头结点
 
