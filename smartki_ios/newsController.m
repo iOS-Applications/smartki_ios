@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *imgScrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *imgPageControl;
 @property (weak, nonatomic) IBOutlet UITableView *newsTableView;
+@property (nonatomic, strong) NSTimer *timer; // 轮播图的切图时隔
 @property newsModel *head; // 数据存入链表的头结点
 
 @property NSString  *myUser;
@@ -57,7 +58,127 @@
     
     [self getNewsDataRequestWithUser:weakSelf.myUser andToken:weakSelf.myToken];
     
-//    self.temp = 0;
+    
+    /*********** 设置轮播图 ************/
+    
+    //    图片的宽
+    CGFloat imageW = weakSelf.imgScrollView.frame.size.width;
+    //    CGFloat imageW = 300;
+    //    图片高
+    CGFloat imageH = weakSelf.imgScrollView.frame.size.height;
+    //    图片的Y
+    CGFloat imageY = 0;
+    //    图片中数
+    NSInteger imgCount = 3;
+    
+    for (int i = 0; i < imgCount; i++) {
+        UIImageView *imageView = [[UIImageView alloc] init];
+        //        图片X
+        CGFloat imageX = i * imageW;
+        //        设置frame
+        imageView.frame = CGRectMake(imageX, imageY, imageW, imageH);
+        //        设置图片
+//        NSString *name = [NSString stringWithFormat:@"img_0%d", i + 1];
+        imageView.image = [UIImage imageNamed:@"icon.png"];
+        //        隐藏指示条
+//        self.imgScrollView.showsHorizontalScrollIndicator = NO;
+        
+        [self.imgScrollView addSubview:imageView];
+    }
+    
+    //    2.设置scrollview的滚动范围
+    CGFloat contentW = imgCount *imageW;
+    //不允许在垂直方向上进行滚动
+    self.imgScrollView.contentSize = CGSizeMake(contentW, 0);
+    
+    //    3.设置分页
+//    self.imgScrollView.pagingEnabled = YES;
+    
+    //    4.监听scrollview的滚动
+    self.imgScrollView.delegate = weakSelf;
+    
+    [self addTimer];
+}
+
+#pragma mark 轮播图-下一张图
+- (void)nextImage
+{
+    int page = (int)self.imgPageControl.currentPage;
+    if (page == 2) {
+        page = 0;
+    }else
+    {
+        page++;
+    }
+    
+    //  滚动scrollview
+    CGFloat x = page * self.imgScrollView.frame.size.width;
+    self.imgScrollView.contentOffset = CGPointMake(x, 0);
+}
+
+#pragma mark 轮播图-开始拖拽的时候调用
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    //    关闭定时器(注意点; 定时器一旦被关闭,无法再开启)
+    //    [self.timer invalidate];
+    [self removeTimer];
+}
+
+#pragma mark 轮播图-停止拖拽时候调用
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    //    开启定时器
+    [self addTimer];
+}
+
+/**
+ *  轮播图-开启定时器
+ */
+- (void)addTimer{
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(nextImage) userInfo:nil repeats:YES];
+}
+
+/**
+ *  轮播图-关闭定时器
+ */
+- (void)removeTimer
+{
+    [self.timer invalidate];
+}
+
+#pragma mark scrollView滚动时候
+-(void)scrollViewDidScroll:(nonnull UIScrollView *)scrollView{
+    
+    /***** 轮播图 *****/
+    if (scrollView == self.imgScrollView) {
+        NSLog(@"滚动中");
+        //    计算页码
+        //    页码 = (contentoffset.x + scrollView一半宽度)/scrollView宽度
+        CGFloat scrollviewW =  scrollView.frame.size.width;
+        CGFloat x = scrollView.contentOffset.x;
+        int page = (x + scrollviewW / 2) /  scrollviewW;
+        self.imgPageControl.currentPage = page;
+    }else{
+        
+        /****** 显示数据的TableView ******/
+        // 取内容的高度：
+        //    如果内容高度大于UITableView高度，就取TableView高度
+        //    如果内容高度小于UITableView高度，就取内容的实际高度
+        float height = scrollView.contentSize.height > self.newsTableView.frame.size.height ?self.newsTableView.frame.size.height : scrollView.contentSize.height;
+        __weak typeof(self) weakSelf = self;
+        
+        if ((height - scrollView.contentSize.height + scrollView.contentOffset.y) / height > 0.2 && self.isRefreshing == NO) {
+            // 调用上拉刷新方法
+            NSLog(@"refresh");
+        }
+        
+        if (- scrollView.contentOffset.y / self.newsTableView.frame.size.height > 0.2 && self.isRefreshing == NO) {
+            // 调用下拉刷新方法
+            NSLog(@"xia refresh");
+            [self getNewsDataRequestWithUser:weakSelf.myUser andToken:weakSelf.myToken];
+        }
+    }
 }
 
 // 网络请求
@@ -154,29 +275,6 @@
     [HTTP_METHOD HTTP_GET_METHOD_WithURL_DIC:url andRequestData:data callbackMethod:^(NSDictionary *back) {
         [weakSelf requestNewsResult:back];
     }];
-}
-
-#pragma mark 上拉和下拉刷新
--(void)scrollViewDidScroll:(nonnull UIScrollView *)scrollView{
-    // 取内容的高度：
-    
-    //    如果内容高度大于UITableView高度，就取TableView高度
-    
-    //    如果内容高度小于UITableView高度，就取内容的实际高度
-    
-    float height = scrollView.contentSize.height > self.newsTableView.frame.size.height ?self.newsTableView.frame.size.height : scrollView.contentSize.height;
-    __weak typeof(self) weakSelf = self;
-    
-    if ((height - scrollView.contentSize.height + scrollView.contentOffset.y) / height > 0.2 && self.isRefreshing == NO) {
-        // 调用上拉刷新方法
-        NSLog(@"refresh");
-    }
-    
-    if (- scrollView.contentOffset.y / self.newsTableView.frame.size.height > 0.2 && self.isRefreshing == NO) {
-        // 调用下拉刷新方法
-        NSLog(@"xia refresh");
-        [self getNewsDataRequestWithUser:weakSelf.myUser andToken:weakSelf.myToken];
-    }
 }
 
 -(NSInteger)numberOfSectionsInTableView:(nonnull UITableView *)tableView{

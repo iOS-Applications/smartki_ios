@@ -337,14 +337,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogq-pC-pQG" userLabel="顶部视图">
                                 <rect key="frame" x="0.0" y="64" width="600" height="138"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bss-Qz-p9z">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bss-Qz-p9z">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="138"/>
                                     </scrollView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Lce-LF-DvI">
                                         <rect key="frame" x="270" y="92" width="60" height="46"/>
                                     </pageControl>
                                 </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Lce-LF-DvI" firstAttribute="width" secondItem="ogq-pC-pQG" secondAttribute="width" multiplier="1:10" id="1PA-9U-HKo"/>
                                     <constraint firstItem="bss-Qz-p9z" firstAttribute="top" secondItem="ogq-pC-pQG" secondAttribute="top" id="565-Wc-Hpk"/>
@@ -371,8 +370,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="最新信息" id="t9P-US-KwF" userLabel="最新信息"/>
                     <connections>
-                        <outlet property="imgPageControl" destination="Lce-LF-DvI" id="dQV-E8-OSS"/>
-                        <outlet property="imgScrollView" destination="bss-Qz-p9z" id="8yW-uw-UqH"/>
+                        <outlet property="imgPageControl" destination="Lce-LF-DvI" id="rw9-8l-S02"/>
+                        <outlet property="imgScrollView" destination="bss-Qz-p9z" id="MR6-iB-0Uz"/>
                         <outlet property="newsTableView" destination="xw3-aS-2iz" id="rDx-tp-qRx"/>
                     </connections>
                 </viewController>
