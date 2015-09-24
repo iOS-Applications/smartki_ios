@@ -17,12 +17,18 @@
 #define token           @"token"
 #define isLogin         @"isLogin"
 #define request_url     @"https://233.smartki.sinaapp.com/smartki_api_view.php"
+#define requestImg_url  @"http://smartki-img.stor.sinaapp.com"
+const int pageImgCount = 3; // 轮播图的图片总数
 
 @interface newsController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>{
     
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *imgScrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *imgPageControl;
+@property (weak, nonatomic) IBOutlet UIImageView *imgV1;
+@property (weak, nonatomic) IBOutlet UIImageView *imgV2;
+@property (weak, nonatomic) IBOutlet UIImageView *imgV3;
+
 @property (weak, nonatomic) IBOutlet UITableView *newsTableView;
 @property (nonatomic, strong) NSTimer *timer; // 轮播图的切图时隔
 @property newsModel *head; // 数据存入链表的头结点
@@ -60,42 +66,45 @@
     
     
     /*********** 设置轮播图 ************/
+    //    监听scrollview的滚动
+    self.imgScrollView.delegate = weakSelf;
     
     //    图片的宽
-    CGFloat imageW = weakSelf.imgScrollView.frame.size.width;
+    CGFloat imageW = weakSelf.view.frame.size.width;
     //    CGFloat imageW = 300;
     //    图片高
     CGFloat imageH = weakSelf.imgScrollView.frame.size.height;
     //    图片的Y
     CGFloat imageY = 0;
-    //    图片中数
-    NSInteger imgCount = 3;
+    NSArray *imgVArr = [[NSArray alloc]initWithObjects:self.imgV1,self.imgV2,self.imgV3, nil];
     
-    for (int i = 0; i < imgCount; i++) {
-        UIImageView *imageView = [[UIImageView alloc] init];
+    for (int i = 0; i < pageImgCount; i++) {
+
+        NSString *imgName = [NSString stringWithFormat:@"%d.png",i+1];
+        NSURL *imgUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",requestImg_url,imgName]];
+
+        NSData *imgData = [NSData dataWithContentsOfURL:imgUrl];
+        
         //        图片X
         CGFloat imageX = i * imageW;
         //        设置frame
-        imageView.frame = CGRectMake(imageX, imageY, imageW, imageH);
+        [imgVArr[i] setFrame:CGRectMake(imageX, imageY, imageW, imageH)];
         //        设置图片
 //        NSString *name = [NSString stringWithFormat:@"img_0%d", i + 1];
-        imageView.image = [UIImage imageNamed:@"icon.png"];
+        [imgVArr[i] setImage:[[UIImage alloc]initWithData:imgData]];
         //        隐藏指示条
 //        self.imgScrollView.showsHorizontalScrollIndicator = NO;
         
-        [self.imgScrollView addSubview:imageView];
+        [self.imgScrollView addSubview:imgVArr[i]];
     }
     
     //    2.设置scrollview的滚动范围
-    CGFloat contentW = imgCount *imageW;
+    CGFloat contentW = pageImgCount *imageW;
     //不允许在垂直方向上进行滚动
     self.imgScrollView.contentSize = CGSizeMake(contentW, 0);
     
     //    3.设置分页
 //    self.imgScrollView.pagingEnabled = YES;
-    
-    //    4.监听scrollview的滚动
-    self.imgScrollView.delegate = weakSelf;
     
     [self addTimer];
 }
@@ -104,7 +113,7 @@
 - (void)nextImage
 {
     int page = (int)self.imgPageControl.currentPage;
-    if (page == 2) {
+    if (page == pageImgCount-1) {
         page = 0;
     }else
     {

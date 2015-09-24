@@ -29,6 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // 获取的数据 mvc传值
     NSLog(@"main:%@",self.getloginCon_Data.loginData);
     __weak typeof(self) weakSelf = self;
